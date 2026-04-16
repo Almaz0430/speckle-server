@@ -5,19 +5,19 @@
     <figure v-if="isDarkTheme" class="absolute w-full">
       <img
         src="~/assets/images/connectors/hero_dark.webp"
-        alt="Speckle Connectors"
+        alt="Connectors"
         class="w-full h-auto aspect-[896/405] object-cover"
       />
       <img
         src="~/assets/images/connectors/hero_dark.webp"
-        alt="Speckle Connectors"
+        alt="Connectors"
         class="absolute bottom-0 left-0 w-full h-[125px] aspect-[896/405] object-cover object-left-bottom blur-[20px]"
       />
     </figure>
     <figure v-else class="absolute w-full">
       <img
         src="~/assets/images/connectors/hero_light.webp"
-        alt="Speckle Connectors"
+        alt="Connectors"
         class="w-full h-auto aspect-[896/405] object-cover"
       />
       <img

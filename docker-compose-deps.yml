@@ -13,7 +13,7 @@ services:
       - ./setup/db/10-docker_postgres_init.sql:/docker-entrypoint-initdb.d/10-docker_postgres_init.sql
       - ./setup/db/11-docker_postgres_keycloak_init.sql:/docker-entrypoint-initdb.d/11-docker_postgres_keycloak_init.sql
     ports:
-      - '127.0.0.1:5432:5432'
+      - '127.0.0.1:5433:5432'
     command: postgres -c max_prepared_transactions=150
 
   postgres-region1:
@@ -52,7 +52,7 @@ services:
     volumes:
       - redis-data:/data
     ports:
-      - '127.0.0.1:6379:6379'
+      - '127.0.0.1:6380:6379'
 
   minio:
     image: 'minio/minio'
@@ -61,8 +61,8 @@ services:
     volumes:
       - minio-data:/data
     ports:
-      - '127.0.0.1:9000:9000'
-      - '127.0.0.1:9001:9001'
+      - '127.0.0.1:9100:9000'
+      - '127.0.0.1:9101:9001'
 
   minio-region1:
     image: 'minio/minio'
@@ -106,9 +106,9 @@ services:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
     ports:
-      - 8443:8443
-      - 9010:9000
-      - 8090:8080
+      - 9443:8443
+      - 9011:9000
+      - 8091:8080
     command: start-dev --import-realm
     volumes:
       - ./setup/keycloak:/opt/keycloak/data/import

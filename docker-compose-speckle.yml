@@ -31,7 +31,6 @@ services:
       # This is the URL of the server as accessed via this docker compose network.
       NUXT_PUBLIC_BACKEND_API_ORIGIN: 'http://speckle-server:3000'
       NUXT_PUBLIC_LOG_LEVEL: 'warn'
-      NUXT_REDIS_URL: 'redis://redis'
       LOG_LEVEL: 'info'
       LOG_PRETTY: 'true'
 
@@ -39,7 +38,7 @@ services:
       NUXT_PUBLIC_FF_NEXT_GEN_FILE_IMPORTER_ENABLED: 'true'
     depends_on:
       - speckle-server
-      # - redis
+      - redis
 
   speckle-server:
     build:
@@ -86,7 +85,7 @@ services:
       FILEIMPORT_SERVICE_REDIS_URL: 'redis://redis'
 
       S3_ENDPOINT: 'http://minio:9000'
-      S3_PUBLIC_ENDPOINT: 'http://127.0.0.1:9000'
+      S3_PUBLIC_ENDPOINT: 'http://127.0.0.1:9100'
       S3_ACCESS_KEY: 'minioadmin'
       S3_SECRET_KEY: 'minioadmin'
       S3_BUCKET: 'speckle-server'
@@ -104,10 +103,9 @@ services:
       FF_NEXT_GEN_FILE_IMPORTER_ENABLED: 'true'
 
     depends_on:
-      []
-      # - minio
-      # - redis
-      # - postgres
+      - minio
+      - redis
+      - postgres
 
   preview-service:
     build:
@@ -125,8 +123,8 @@ services:
       LOG_PRETTY: 'true'
       REDIS_URL: 'redis://redis'
     depends_on:
-      []
-      # - redis
+      - redis
+      - speckle-server
 
   webhook-service:
     build:
@@ -141,7 +139,8 @@ services:
       PG_CONNECTION_STRING: 'postgres://speckle:speckle@postgres/speckle'
     depends_on:
       - speckle-server
-      # - postgres
+      - postgres
+      - redis
 
   ifc-import-server:
     build:
@@ -156,4 +155,5 @@ services:
       FILEIMPORT_QUEUE_POSTGRES_URL: 'postgresql://speckle:speckle@postgres/speckle'
     depends_on:
       - speckle-server
-      # - postgres
+      - postgres
+      - redis
