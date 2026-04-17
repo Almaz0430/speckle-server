@@ -30,16 +30,6 @@
       <div
         class="flex flex-col gap-2 items-start sm:gap-0 sm:flex-row sm:items-center sm:justify-between w-full pl-2"
       >
-        <FormButton
-          text
-          size="sm"
-          target="_blank"
-          external
-          to="https://speckle.systems/blog/automate-with-speckle/"
-          class="order-2 sm:order-1"
-        >
-          Learn more about Automate
-        </FormButton>
         <div
           class="flex w-full justify-between order-1 sm:order-2 sm:justify-normal sm:w-auto sm:space-x-1"
         >

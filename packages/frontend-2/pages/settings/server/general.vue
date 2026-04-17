@@ -1,17 +1,17 @@
 <template>
   <section>
     <div class="md:max-w-xl md:mx-auto pb-6 md:pb-0">
-      <SettingsSectionHeader title="General" text="Manage your server settings" />
+      <SettingsSectionHeader :title="t.settings.server.general.title" :text="t.settings.server.general.subtitle" />
       <div class="flex flex-col space-y-6">
-        <SettingsSectionHeader title="Server details" subheading />
+        <SettingsSectionHeader :title="t.settings.server.general.serverDetails" subheading />
         <form class="flex flex-col gap-2" @submit="onSubmit">
           <div class="flex flex-col gap-4">
             <FormTextInput
               v-model="name"
-              label="Server public name"
+              :label="t.settings.server.general.publicName"
               name="serverName"
               color="foundation"
-              placeholder="Server name"
+              :placeholder="t.settings.server.general.namePlaceholder"
               show-label
               label-position="left"
               :rules="requiredRule"
@@ -21,9 +21,9 @@
             <FormTextArea
               v-model="description"
               color="foundation"
-              label="Description"
+              :label="t.settings.server.general.description"
               name="description"
-              placeholder="Description"
+              :placeholder="t.settings.server.general.descriptionPlaceholder"
               show-label
               label-position="left"
             />
@@ -31,9 +31,9 @@
             <FormTextInput
               v-model="company"
               color="foundation"
-              label="Owner"
+              :label="t.settings.server.general.owner"
               name="owner"
-              placeholder="Owner"
+              :placeholder="t.settings.server.general.ownerPlaceholder"
               show-label
               label-position="left"
             />
@@ -41,9 +41,9 @@
             <FormTextInput
               v-model="adminContact"
               color="foundation"
-              label="Admin email"
+              :label="t.settings.server.general.adminEmail"
               name="adminEmail"
-              placeholder="Admin email"
+              :placeholder="t.settings.server.general.adminEmailPlaceholder"
               show-label
               type="email"
               label-position="left"
@@ -52,7 +52,7 @@
             <FormTextInput
               v-model="termsOfService"
               color="foundation"
-              label="URL to the Terms of Service"
+              :label="t.settings.server.general.termsOfService"
               name="terms"
               show-label
               label-position="left"
@@ -60,8 +60,8 @@
             <hr class="border-outline-3" />
             <FormCheckbox
               v-model="inviteOnly"
-              label="Invite only mode"
-              description="Only users with an invitation will be able to join the server"
+              :label="t.settings.server.general.inviteOnly"
+              :description="t.settings.server.general.inviteOnlyDescription"
               label-position="left"
               name="inviteOnly"
               show-label
@@ -69,14 +69,14 @@
             <hr class="border-outline-3" />
             <FormCheckbox
               v-model="guestModeEnabled"
-              label="Guest mode"
-              description="Enables the 'Guest' server role, which allows users to only contribute to projects that they're invited to"
+              :label="t.settings.server.general.guestMode"
+              :description="t.settings.server.general.guestModeDescription"
               label-position="left"
               name="guestModeEnabled"
               show-label
             />
             <div class="mt-6">
-              <FormButton color="primary" @click="onSubmit">Save changes</FormButton>
+              <FormButton color="primary" @click="onSubmit">{{ t.settings.server.general.saveChanges }}</FormButton>
             </div>
           </div>
         </form>
@@ -125,6 +125,7 @@ type FormValues = {
 }
 
 const logger = useLogger()
+const { t } = useLocale()
 const { triggerNotification } = useGlobalToast()
 const { handleSubmit } = useForm<FormValues>()
 const { result } = useQuery(serverInfoQuery)
@@ -187,15 +188,15 @@ const onSubmit = handleSubmit(async () => {
   if (result && result.data) {
     triggerNotification({
       type: ToastNotificationType.Success,
-      title: 'Successfully saved',
-      description: 'Your server settings have been saved.'
+      title: t.value.settings.server.general.savedSuccess,
+      description: t.value.settings.server.general.savedSuccessDescription
     })
   } else {
     logger.error(result && result.errors)
     triggerNotification({
       type: ToastNotificationType.Danger,
-      title: 'Saving failed',
-      description: 'Failed to update server info'
+      title: t.value.settings.server.general.saveFailed,
+      description: t.value.settings.server.general.saveFailedDescription
     })
   }
 })

@@ -35,6 +35,7 @@ const props = defineProps<{
 
 const workspaceId = ref(props.workspaceId)
 const open = defineModel<boolean>('open', { required: true })
+const { t } = useLocale()
 
 const {
   public: { FF_PERSONAL_PROJECTS_LIMITS_ENABLED }
@@ -46,12 +47,12 @@ const { step, resetStep, goToNextStep, previousStep, goToPreviousStep } =
     steps: computed(() => [
       {
         id: DialogStepId.Workspace,
-        title: 'Choose workspace for a new project',
+        title: t.value.projects.createDialog.chooseWorkspace,
         skippable: !forcePickingWorkspace.value
       },
       {
         id: DialogStepId.Metadata,
-        title: 'Create a new project'
+        title: t.value.projects.createDialog.createNew
       }
     ]),
     resolveNextStep: () => {

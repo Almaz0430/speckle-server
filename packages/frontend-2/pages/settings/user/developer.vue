@@ -3,13 +3,13 @@
     <div class="md:max-w-5xl md:mx-auto pb-6 md:pb-0">
       <div class="flex flex-col">
         <SettingsSectionHeader
-          title="Developer settings"
-          text="Manage your tokens and authorized app"
+          :title="t.settings.developer.title"
+          :text="t.settings.developer.subtitle"
         />
         <div class="flex flex-col gap-6">
           <div class="flex flex-col">
             <SettingsSectionHeader
-              title="Explore GraphQL"
+              :title="t.settings.developer.exploreGraphQL"
               class="md:gap-0"
               subheading
               :buttons="[
@@ -20,7 +20,7 @@
                     external: true
                   },
                   onClick: goToExplorer,
-                  label: 'Open explorer'
+                  label: t.settings.developer.openExplorer
                 }
               ]"
             />
@@ -57,6 +57,7 @@ useHead({
 })
 
 const apiOrigin = useApiOrigin()
+const { t } = useLocale()
 
 const itemToModify = ref<TokenItem | ApplicationItem | AuthorizedAppItem | null>(null)
 const showDeleteDialog = ref(false)

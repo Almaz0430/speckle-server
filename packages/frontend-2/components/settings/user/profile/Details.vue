@@ -1,12 +1,12 @@
 <template>
   <div class="flex flex-col gap-y-4">
-    <SettingsSectionHeader title="Your details" subheading />
+    <SettingsSectionHeader :title="t.settings.profile.details.title" subheading />
     <FormTextInput
       v-model="name"
       color="foundation"
-      label="Name"
+      :label="t.settings.profile.details.name"
       name="name"
-      placeholder="John Doe"
+      :placeholder="t.settings.profile.details.namePlaceholder"
       show-label
       label-position="left"
       :rules="[isRequired, isStringOfLength({ maxLength: 512 })]"
@@ -15,9 +15,9 @@
     <FormTextInput
       v-model="company"
       color="foundation"
-      label="Company"
+      :label="t.settings.profile.details.company"
       name="company"
-      placeholder="Example Ltd."
+      :placeholder="t.settings.profile.details.companyPlaceholder"
       show-label
       label-position="left"
       :rules="[isStringOfLength({ maxLength: 512 })]"
@@ -26,9 +26,9 @@
     <hr class="border-outline-2 my-3" />
     <div class="grid md:grid-cols-2">
       <div class="flex flex-col">
-        <span class="text-body-xs font-medium text-foreground">Avatar</span>
+        <span class="text-body-xs font-medium text-foreground">{{ t.settings.profile.details.avatar }}</span>
         <span class="text-body-2xs text-foreground-2 max-w-[230px]">
-          Upload your profile avatar image or use your initials.
+          {{ t.settings.profile.details.avatarSubtitle }}
         </span>
       </div>
       <div class="flex items-center justify-center">
@@ -48,6 +48,7 @@ import type {
 import { isRequired, isStringOfLength } from '~~/lib/common/helpers/validation'
 import { useUpdateUserProfile } from '~~/lib/user/composables/management'
 import { TIME_MS } from '@speckle/shared'
+const { t } = useLocale()
 
 graphql(`
   fragment SettingsUserProfileDetails_User on User {

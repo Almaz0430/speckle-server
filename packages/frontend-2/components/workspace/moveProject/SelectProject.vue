@@ -2,10 +2,10 @@
   <div>
     <FormTextInput
       v-bind="bind"
-      label="Move projects"
+      :label="t.workspace.moveProject.searchLabel"
       name="search"
       color="foundation"
-      placeholder="Search projects..."
+      :placeholder="t.workspace.moveProject.searchPlaceholder"
       show-clear
       full-width
       class="mb-2"
@@ -30,9 +30,8 @@
             </span>
             <div class="flex items-center gap-x-1">
               <span class="text-foreground-3 truncate">
-                {{ project.modelCount.totalCount }} model{{
-                  project.modelCount.totalCount !== 1 ? 's' : ''
-                }}
+                {{ project.modelCount.totalCount }}
+                {{ project.modelCount.totalCount !== 1 ? t.workspace.moveProject.models : t.workspace.moveProject.model }}
               </span>
             </div>
           </div>
@@ -46,17 +45,16 @@
               :disabled="isProjectDisabled(project)"
               @click="handleProjectClick(project)"
             >
-              Move...
+              {{ t.workspace.moveProject.moveButton }}
             </FormButton>
           </div>
         </div>
       </div>
       <p v-else-if="!search?.length" class="py-4 text-body-xs text-foreground-2">
-        You don't have any projects that can be moved into this workspace. Only projects
-        you own and that aren't in another workspace can be moved.
+        {{ t.workspace.moveProject.noProjects }}
       </p>
       <p v-else class="py-4 text-body-xs text-foreground-2">
-        No projects match your search.
+        {{ t.workspace.moveProject.noResults }}
       </p>
     </template>
     <InfiniteLoading
@@ -93,6 +91,7 @@ import {
   WorkspaceLimitsReachedError
 } from '@speckle/shared/authz'
 
+const { t } = useLocale()
 const search = defineModel<string>('search')
 const { on, bind } = useDebouncedTextInput({ model: search })
 

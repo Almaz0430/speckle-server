@@ -28,10 +28,9 @@
     </figure>
 
     <div class="absolute bottom-0 w-full p-6">
-      <h3>Sync models in real time</h3>
+      <h3>{{ t.connectors.banner.title }}</h3>
       <p class="text-body-xs text-foreground-2 mt-2 max-w-md text-balance">
-        Extract and exchange data between the most popular AEC applications using our
-        tailored connectors.
+        {{ t.connectors.banner.description }}
       </p>
     </div>
   </div>
@@ -41,4 +40,5 @@
 import { useTheme } from '~/lib/core/composables/theme'
 
 const { isDarkTheme } = useTheme()
+const { t } = useLocale()
 </script>

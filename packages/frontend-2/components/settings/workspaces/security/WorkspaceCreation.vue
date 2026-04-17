@@ -31,14 +31,6 @@
             :show-label="false"
           />
         </div>
-        <FormButton
-          v-else
-          to="mailto:billing@speckle.systems?subject=Workspace%20Creation%20Restriction"
-          size="sm"
-          color="outline"
-        >
-          Contact us
-        </FormButton>
       </div>
     </div>
   </section>

@@ -7,14 +7,6 @@
       </p>
     </template>
     <template #top-buttons>
-      <FormButton
-        color="outline"
-        to="https://speckle.guide/server/server-webhooks.html"
-        external
-        target="_blank"
-      >
-        Docs
-      </FormButton>
       <FormButton :disabled="!canUpdate?.authorized" @click="openCreateWebhookDialog">
         New
       </FormButton>

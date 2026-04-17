@@ -1,19 +1,19 @@
 <template>
   <form class="mx-auto w-full px-2" @submit="onSubmit">
     <h1 class="text-heading-xl text-center w-full inline-block mb-4">
-      Reset your password
+      {{ t.auth.passwordReset.title }}
     </h1>
 
     <div class="flex flex-col space-y-4">
       <p class="text-center text-body-xs text-foreground mb-2">
-        Choose a new password for your Speckle account
+        {{ t.settings.profile.changePassword.description }}
       </p>
       <FormTextInput
         v-model="password"
         type="password"
         name="password"
-        label="Password"
-        placeholder="New password"
+        :label="t.auth.passwordReset.newPassword"
+        :placeholder="t.auth.passwordReset.newPasswordPlaceholder"
         color="foundation"
         size="lg"
         :rules="[isRequired]"
@@ -23,7 +23,7 @@
     </div>
 
     <FormButton class="mt-8" submit full-width size="lg" :disabled="loading">
-      Reset password
+      {{ t.auth.passwordReset.resetButton }}
     </FormButton>
   </form>
 </template>
@@ -40,6 +40,7 @@ const props = defineProps<{
   token: string
 }>()
 
+const { t } = useLocale()
 const { handleSubmit } = useForm<FormValues>()
 const { finalize } = usePasswordReset()
 

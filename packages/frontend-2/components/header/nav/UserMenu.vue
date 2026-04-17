@@ -28,7 +28,7 @@
                   'text-body-xs flex px-2 py-1 text-foreground cursor-pointer transition mx-1 rounded'
                 ]"
               >
-                Settings
+                {{ t.header.userMenu.settings }}
               </NuxtLink>
             </MenuItem>
             <MenuItem v-if="isAdmin" v-slot="{ active }">
@@ -39,7 +39,7 @@
                   'text-body-xs flex px-2 py-1 text-foreground cursor-pointer transition mx-1 rounded'
                 ]"
               >
-                Server settings
+                {{ t.header.userMenu.serverSettings }}
               </NuxtLink>
             </MenuItem>
             <MenuItem v-slot="{ active }">
@@ -50,7 +50,7 @@
                 ]"
                 @click="toggleTheme"
               >
-                {{ isDarkTheme ? 'Light mode' : 'Dark mode' }}
+                {{ isDarkTheme ? t.header.userMenu.lightMode : t.header.userMenu.darkMode }}
               </NuxtLink>
             </MenuItem>
             <MenuItem v-if="activeUser && !isGuest" v-slot="{ active }">
@@ -61,7 +61,7 @@
                 ]"
                 @click="toggleInviteDialog"
               >
-                Invite to Speckle
+                {{ t.header.userMenu.invite }}
               </NuxtLink>
             </MenuItem>
           </div>
@@ -74,7 +74,7 @@
                 ]"
                 @click="logout"
               >
-                Log out
+                {{ t.header.userMenu.logout }}
               </NuxtLink>
             </MenuItem>
             <MenuItem v-if="!activeUser && loginUrl" v-slot="{ active }">
@@ -85,7 +85,7 @@
                 ]"
                 :to="loginUrl"
               >
-                Log in
+                {{ t.header.userMenu.login }}
               </NuxtLink>
             </MenuItem>
 
@@ -93,14 +93,14 @@
               class="border-t border-outline-3 py-1 mt-1 text-xs text-foreground-2 px-3 gap-1 flex flex-col"
             >
               <MenuItem v-if="version">
-                <div>Version {{ version }}</div>
+                <div>{{ t.header.userMenu.version }} {{ version }}</div>
               </MenuItem>
               <MenuItem>
                 <NuxtLink
                   class="cursor-pointer text-foreground-2 hover:text-foreground"
                   @click="copySupportReference"
                 >
-                  Copy support reference
+                  {{ t.header.userMenu.copySupportReference }}
                 </NuxtLink>
               </MenuItem>
             </div>
@@ -127,6 +127,7 @@ defineProps<{
   loginUrl?: RouteLocationRaw
 }>()
 
+const { t } = useLocale()
 const { logout } = useAuthManager()
 const { activeUser, isGuest } = useActiveUser()
 const { isDarkTheme, toggleTheme } = useTheme()

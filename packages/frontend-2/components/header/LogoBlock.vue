@@ -5,18 +5,12 @@
     :to="to"
     :target="target"
   >
-    <img
-      class="h-8 w-8 block mr-1"
-      src="~~/assets/images/speckle_logo_big.png"
-      alt="Speckle"
-    />
-
     <div
       v-if="!minimal"
       class="text-sm mt-0 font-medium"
       :class="showTextOnMobile ? '' : 'hidden md:flex'"
     >
-      Speckle
+      PM Viewer
     </div>
   </Component>
 </template>

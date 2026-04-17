@@ -45,7 +45,7 @@
                   @click="isOpenMobile = false"
                 >
                   <LayoutSidebarMenuGroupItem
-                    label="Projects"
+                    :label="t.dashboard.sidebar.projects"
                     :active="
                       route.name === 'workspaces-slug' || isActive(projectsRoute)
                     "
@@ -62,7 +62,7 @@
                   @click="isOpenMobile = false"
                 >
                   <LayoutSidebarMenuGroupItem
-                    label="Intelligence"
+                    :label="t.dashboard.sidebar.intelligence"
                     :active="isActive(dashboardsRoute(activeWorkspaceSlug))"
                   >
                     <template #icon>
@@ -73,7 +73,7 @@
 
                 <NuxtLink :to="connectorsRoute" @click="isOpenMobile = false">
                   <LayoutSidebarMenuGroupItem
-                    label="Connectors"
+                    :label="t.dashboard.sidebar.connectors"
                     :active="isActive(connectorsRoute)"
                   >
                     <template #icon>
@@ -83,10 +83,10 @@
                 </NuxtLink>
               </LayoutSidebarMenuGroup>
 
-              <LayoutSidebarMenuGroup title="Resources" collapsible>
+              <LayoutSidebarMenuGroup :title="t.dashboard.sidebar.resources" collapsible>
                 <LayoutSidebarMenuGroupItem
                   v-if="isWorkspacesEnabled"
-                  label="Give us feedback"
+                  :label="t.dashboard.sidebar.feedback"
                   @click="openChat"
                 >
                   <template #icon>
@@ -96,7 +96,7 @@
 
                 <NuxtLink :to="tutorialsRoute" @click="isOpenMobile = false">
                   <LayoutSidebarMenuGroupItem
-                    label="Tutorials"
+                    :label="t.dashboard.sidebar.tutorials"
                     :active="isActive(tutorialsRoute)"
                   >
                     <template #icon>
@@ -105,45 +105,9 @@
                   </LayoutSidebarMenuGroupItem>
                 </NuxtLink>
 
-                <NuxtLink
-                  to="https://speckle.community/"
-                  target="_blank"
-                  @click="isOpenMobile = false"
-                >
-                  <LayoutSidebarMenuGroupItem label="Community forum" external>
-                    <template #icon>
-                      <IconCommunity class="size-4 text-foreground-2" />
-                    </template>
-                  </LayoutSidebarMenuGroupItem>
-                </NuxtLink>
-
-                <NuxtLink
-                  :to="docsPageUrl"
-                  target="_blank"
-                  @click="isOpenMobile = false"
-                >
-                  <LayoutSidebarMenuGroupItem label="Documentation" external>
-                    <template #icon>
-                      <IconDocumentation class="size-4 text-foreground-2" />
-                    </template>
-                  </LayoutSidebarMenuGroupItem>
-                </NuxtLink>
-
-                <NuxtLink
-                  to="https://speckle.systems/updates"
-                  target="_blank"
-                  @click="isOpenMobile = false"
-                >
-                  <LayoutSidebarMenuGroupItem label="Changelog" external>
-                    <template #icon>
-                      <IconChangelog class="size-4 text-foreground-2" />
-                    </template>
-                  </LayoutSidebarMenuGroupItem>
-                </NuxtLink>
-
                 <div v-if="isWorkspacesEnabled">
                   <LayoutSidebarMenuGroupItem
-                    label="Getting started"
+                    :label="t.dashboard.sidebar.gettingStarted"
                     @click="openExplainerVideoDialog"
                   >
                     <template #icon>
@@ -157,9 +121,6 @@
               </LayoutSidebarMenuGroup>
             </div>
           </LayoutSidebarMenu>
-          <template v-if="showSpeckleCon25Promo" #promo>
-            <DashboardSpeckleConPromo />
-          </template>
         </LayoutSidebar>
       </div>
     </template>
@@ -178,7 +139,6 @@ import {
   connectorsRoute,
   workspaceRoute,
   tutorialsRoute,
-  docsPageUrl,
   dashboardsRoute
 } from '~/lib/common/helpers/route'
 import { useRoute } from 'vue-router'
@@ -190,6 +150,7 @@ import { useQuery } from '@vue/apollo-composable'
 import dayjs from 'dayjs'
 import { useActiveUserMeta } from '~/lib/user/composables/meta'
 import { LayoutDashboard } from 'lucide-vue-next'
+const { t } = useLocale()
 
 const dashboardSidebarQuery = graphql(`
   query DashboardSidebar {

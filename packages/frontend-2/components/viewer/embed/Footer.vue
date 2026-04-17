@@ -7,8 +7,6 @@
       <template v-if="!hideSpeckleBranding">
         <HeaderLogoBlock
           large-icon
-          to="https://speckle.systems/"
-          target="_blank"
           show-text-on-mobile
           :active="false"
         />

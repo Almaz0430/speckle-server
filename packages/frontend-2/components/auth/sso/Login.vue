@@ -1,14 +1,14 @@
 <template>
   <form method="post" @submit="onSubmit">
     <div class="flex flex-col gap-4">
-      <h1 class="text-heading-xl text-center mb-8">Speckle SSO login</h1>
+      <h1 class="text-heading-xl text-center mb-8">{{ t.auth.sso.title }}</h1>
 
       <FormTextInput
         v-model="email"
         type="email"
         name="email"
-        label="Your work email"
-        placeholder="Enter your email"
+        :label="t.auth.sso.workEmail"
+        :placeholder="t.auth.sso.emailPlaceholder"
         size="lg"
         color="foundation"
         :rules="[isEmail, isRequired]"
@@ -77,6 +77,7 @@ const { meta, handleSubmit, setFieldValue, values } = useForm<FormValues>({
   }
 })
 
+const { t } = useLocale()
 const { challenge } = useLoginOrRegisterUtils()
 const { signInOrSignUpWithSso } = useAuthManager()
 const logger = useLogger()

@@ -3,24 +3,21 @@
     <div class="space-y-6">
       <div v-if="!workspaceInvite" class="flex flex-col items-center gap-y-2">
         <h1 class="text-heading-xl text-center inline-block">
-          Create your Speckle account
+          {{ t.auth.register.title }}
         </h1>
       </div>
       <AuthWorkspaceInviteHeader v-else :invite="workspaceInvite" />
       <template v-if="isInviteOnly && !inviteToken">
         <CommonAlert color="warning">
-          <template #title>This server is invite only</template>
-          <template #description>
-            If you have received an invitation email, please follow the instructions in
-            it.
-          </template>
+          <template #title>{{ t.auth.register.inviteOnly }}</template>
+          <template #description>{{ t.auth.register.inviteOnlyDescription }}</template>
         </CommonAlert>
         <div
           v-if="!inviteEmail"
           class="flex gap-1 text-foregound-3 text-body-xs items-center justify-center"
         >
-          <span>Already have an account?</span>
-          <NuxtLink class="text-foreground" :to="loginRoute">Log in</NuxtLink>
+          <span>{{ t.auth.register.alreadyHaveAccount }}</span>
+          <NuxtLink class="text-foreground" :to="loginRoute">{{ t.auth.register.logIn }}</NuxtLink>
         </div>
       </template>
       <template v-else>
@@ -37,7 +34,7 @@
             v-if="hasThirdPartyStrategies && hasLocalStrategy"
             class="text-center text-foreground-2 mb-3 text-body-2xs font-normal"
           >
-            Or sign up with your email
+            {{ t.auth.login.orSignUpWithEmail }}
           </div>
           <AuthRegisterWithEmailBlock
             v-if="serverInfo && hasLocalStrategy"
@@ -69,6 +66,7 @@ const registerPanelWorkspaceInviteQuery = graphql(`
 `)
 
 const isWorkspacesEnabled = useIsWorkspacesEnabled()
+const { t } = useLocale()
 const { appId, challenge, inviteToken } = useLoginOrRegisterUtils()
 const { result } = useQuery(authRegisterPanelQuery, () => ({
   token: inviteToken.value

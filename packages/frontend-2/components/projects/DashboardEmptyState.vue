@@ -1,10 +1,10 @@
 <template>
   <div class="flex justify-center flex-col text-center my-12">
     <h2 class="text-heading mt-2 text-foreground">
-      {{ !canCreateProject ? 'No projects found' : 'Create your first project' }}
+      {{ !canCreateProject ? t.projects.noProjects : t.projects.createFirst }}
     </h2>
     <h4 class="text-body-xs mb-4 mt-2 max-w-xs mx-auto text-foreground-2">
-      Projects are the place where your models and their versions live.
+      {{ t.projects.projectsDescription }}
     </h4>
     <div class="flex flex-col items-center gap-2">
       <FormButton
@@ -13,7 +13,7 @@
         class="shadow-lg"
         @click="$emit('create-project')"
       >
-        New project
+        {{ t.projects.newProject }}
       </FormButton>
     </div>
   </div>
@@ -22,4 +22,5 @@
 defineProps<{ canCreateProject: boolean | undefined }>()
 
 defineEmits(['create-project'])
+const { t } = useLocale()
 </script>

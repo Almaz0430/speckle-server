@@ -2,13 +2,13 @@
   <section>
     <div class="md:max-w-xl md:mx-auto pb-6 md:pb-0">
       <SettingsSectionHeader
-        title="Notifications"
-        text="Your notification preferences"
+        :title="t.settings.notifications.title"
+        :text="t.settings.notifications.subtitle"
       />
       <table class="table-auto w-full rounded-t overflow-hidden">
         <thead class="text-foreground-1">
           <tr>
-            <th class="pb-4 font-medium text-sm text-left">Notification type</th>
+            <th class="pb-4 font-medium text-sm text-left">{{ t.settings.notifications.notificationType }}</th>
             <th
               v-for="channel in notificationChannels"
               :key="channel"
@@ -25,7 +25,7 @@
             class="border-t border-outline-3"
           >
             <td class="text-body-xs py-4">
-              {{ notificationTypeMapping[type] || 'Unknown' }}
+              {{ notificationTypeMapping[type] || t.settings.notifications.unknown }}
             </td>
             <td
               v-for="channel in notificationChannels"
@@ -64,13 +64,14 @@ useHead({
 
 const { mutate, loading } = useUpdateNotificationPreferences()
 const { activeUser: user } = useActiveUser()
+const { t } = useLocale()
 
-const notificationTypeMapping = ref({
-  activityDigest: 'Weekly activity digest',
-  mentionedInComment: 'Mentioned in comment',
-  newStreamAccessRequest: 'Project access request',
-  streamAccessRequestApproved: 'Project access request approved'
-} as Record<string, string>)
+const notificationTypeMapping = computed<Record<string, string>>(() => ({
+  activityDigest: t.value.settings.notifications.activityDigest,
+  mentionedInComment: t.value.settings.notifications.mentionedInComment,
+  newStreamAccessRequest: t.value.settings.notifications.newStreamAccessRequest,
+  streamAccessRequestApproved: t.value.settings.notifications.streamAccessRequestApproved
+}))
 
 const localPreferences = ref({} as NotificationPreferences)
 

@@ -1,13 +1,11 @@
 <template>
   <div class="flex flex-col space-y-6">
-    <SettingsSectionHeader title="Password change" subheading />
+    <SettingsSectionHeader :title="t.settings.profile.changePassword.title" subheading />
     <CommonCard class="text-body-xs bg-foundation">
-      Press the button below to start the password reset process.
-      <br />
-      Once pressed, you will receive an e-mail with further instructions.
+      {{ t.settings.profile.changePassword.description }}
     </CommonCard>
     <div>
-      <FormButton color="primary" @click="onClick">Reset password</FormButton>
+      <FormButton color="primary" @click="onClick">{{ t.settings.profile.changePassword.resetButton }}</FormButton>
     </div>
   </div>
 </template>
@@ -24,6 +22,7 @@ graphql(`
 `)
 
 const { sendResetEmail } = usePasswordReset()
+const { t } = useLocale()
 
 const props = defineProps<{
   user: SettingsUserProfileChangePassword_UserFragment

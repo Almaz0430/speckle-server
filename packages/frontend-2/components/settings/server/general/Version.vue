@@ -1,13 +1,13 @@
 <template>
   <div class="flex flex-col space-y-6">
-    <h2 class="text-xl">Speckle Version</h2>
+    <h2 class="text-xl">{{ t.settings.server.version }}</h2>
     <div class="flex items-center">
       <div class="w-[50%]">
         <p class="text-sm">
-          <span class="font-medium">Current version:</span>
+          <span class="font-medium">{{ t.settings.server.currentVersion }}</span>
           {{ currentVersion }}
         </p>
-        <p v-if="!isLatestVersion" class="text-sm pt-2">New version available</p>
+        <p v-if="!isLatestVersion" class="text-sm pt-2">{{ t.settings.server.newVersionAvailable }}</p>
       </div>
       <div class="flex justify-end w-[50%]">
         <FormButton
@@ -15,7 +15,7 @@
           :disabled="isLatestVersion"
           @click="openGithubReleasePage"
         >
-          {{ isLatestVersion ? 'You are up to date' : `Update to ${latestVersion}` }}
+          {{ isLatestVersion ? t.settings.server.upToDate : `${t.settings.server.updateTo} ${latestVersion}` }}
         </FormButton>
       </div>
     </div>
@@ -26,6 +26,7 @@
 import { serverManagementDataQuery } from '~~/lib/server-management/graphql/queries'
 import { useQuery } from '@vue/apollo-composable'
 import { ref, computed } from 'vue'
+const { t } = useLocale()
 
 interface GithubRelease {
   url: string
@@ -54,7 +55,7 @@ const isLatestVersion = computed(() => {
 })
 
 const openGithubReleasePage = () => {
-  window.open('https://github.com/specklesystems/speckle-server/releases', '_blank')
+  // update link removed
 }
 
 async function getLatestVersion(): Promise<string | null> {

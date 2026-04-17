@@ -29,7 +29,7 @@
         size="lg"
         :to="ssoLoginRoute"
       >
-        Continue with SSO
+        {{ t.auth.login.continueWithSso }}
       </FormButton>
 
       <div class="h-px w-full bg-outline-3 mt-2 shrink-0" />
@@ -43,8 +43,8 @@
           v-if="!forcedInviteEmail"
           class="text-center text-body-xs text-foreground-3 mt-2 select-none"
         >
-          Don't have an account?
-          <NuxtLink class="text-foreground" :to="finalRegisterRoute">Sign up</NuxtLink>
+          {{ t.auth.login.noAccount }}
+          <NuxtLink class="text-foreground" :to="finalRegisterRoute">{{ t.auth.login.signUp }}</NuxtLink>
         </div>
       </div>
     </div>
@@ -70,10 +70,11 @@ const props = withDefaults(
   }>(),
   {
     dialogMode: false,
-    title: 'Speckle login'
+    title: () => useLocale().t.value.auth.login.title
   }
 )
 
+const { t } = useLocale()
 const { appId, challenge } = useLoginOrRegisterUtils()
 const { isLoggedIn } = useActiveUser()
 const { inviteToken } = useAuthManager()

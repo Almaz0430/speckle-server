@@ -8,7 +8,7 @@
             <h1 class="text-heading-lg">Tutorials</h1>
           </div>
           <p class="text-body-sm text-foreground-2">
-            Get started with Speckle with step-by-step instructions for all skill
+            Get started with PM Viewer with step-by-step instructions for all skill
             levels.
           </p>
         </div>
@@ -21,18 +21,6 @@
             :tutorial-item="tutorial"
             source="tutorials"
           />
-        </div>
-        <div class="flex justify-center mt-4">
-          <FormButton
-            label="View all tutorials"
-            to="https://www.speckle.systems/tutorials"
-            target="_blank"
-            color="outline"
-            external
-            @click="trackViewAllClick"
-          >
-            View all tutorials
-          </FormButton>
         </div>
       </section>
     </div>

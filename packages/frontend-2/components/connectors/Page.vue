@@ -44,17 +44,6 @@
           </FormSelectBase>
         </div>
         <ConnectorsBanner v-if="filteredConnectors.length === connectors.length" />
-        <div>
-          <p class="text-body-2xs text-foreground-3 leading-none">
-            Looking for V2 connectors? Get them
-            <NuxtLink
-              class="text-foreground-3 hover:text-foreground-2 underline"
-              to="https://releases.speckle.systems/legacy-connectors"
-            >
-              here.
-            </NuxtLink>
-          </p>
-        </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           <ConnectorsCard
             v-for="connector in filteredConnectors"

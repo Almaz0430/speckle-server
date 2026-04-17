@@ -8,7 +8,7 @@
       />
       <div class="flex items-center gap-2 mb-2">
         <Squares2X2Icon class="h-5 w-5" />
-        <h1 class="text-heading-lg">Projects</h1>
+        <h1 class="text-heading-lg">{{ t.projects.title }}</h1>
       </div>
 
       <div class="flex flex-col lg:flex-row gap-2 lg:items-center justify-between">
@@ -16,7 +16,7 @@
           <FormTextInput
             name="modelsearch"
             :show-label="false"
-            placeholder="Search..."
+            :placeholder="t.projects.search"
             :custom-icon="MagnifyingGlassIcon"
             color="foundation"
             wrapper-classes="grow md:grow-0 md:w-60"
@@ -42,7 +42,7 @@
           </div>
         </div>
         <FormButton v-if="canClickCreate" @click="onClickCreate">
-          New project
+          {{ t.projects.newProject }}
         </FormButton>
       </div>
     </div>
@@ -113,6 +113,7 @@ graphql(`
   }
 `)
 
+const { t } = useLocale()
 const logger = useLogger()
 
 const infiniteLoaderId = ref('')

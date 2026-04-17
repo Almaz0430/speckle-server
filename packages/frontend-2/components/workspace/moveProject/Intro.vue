@@ -45,44 +45,39 @@
     <div class="w-full bg-foundation-page flex flex-col gap-6 p-6">
       <div class="flex flex-col gap-y-4 select-none">
         <h4 class="text-heading-sm text-foreground">
-          <template v-if="!limitType">Move your projects to a workspace to:</template>
+          <template v-if="!limitType">{{ t.workspace.moveProject.title }}</template>
           <template v-else-if="limitType === ViewerLimitsDialogType.Version">
-            Personal projects limit reached
+            {{ t.workspace.moveProject.limitReached }}
           </template>
           <template v-else-if="limitType === ViewerLimitsDialogType.Federated">
-            The federated models couldn't be loaded
+            {{ t.workspace.moveProject.federatedError }}
           </template>
         </h4>
         <template v-if="!limitType">
-          → Create new projects and models,
+          → {{ t.workspace.moveProject.bullet1 }}
           <br />
-          → Invite new project collaborators,
+          → {{ t.workspace.moveProject.bullet2 }}
           <br />
-          → View comments and versions older than {{ versionLimitFormatted }} (paid
-          plans only)
+          → {{ t.workspace.moveProject.bullet3 }} {{ versionLimitFormatted }} {{ t.workspace.moveProject.bullet3Suffix }}
         </template>
         <template v-else-if="limitType === ViewerLimitsDialogType.Version">
-          The version you're trying to load is older than the
-          {{ versionLimitFormatted }} version history limit allowed for Personal
-          projects. Move your project to a workspace to gain access.
+          {{ t.workspace.moveProject.versionLimit }}
+          {{ versionLimitFormatted }} {{ t.workspace.moveProject.versionLimitSuffix }}
         </template>
         <template v-else-if="limitType === ViewerLimitsDialogType.Federated">
-          One of the models is older than the {{ versionLimitFormatted }} version
-          history limit allowed for Personal projects. Move your project to a workspace
-          to gain access.
+          {{ t.workspace.moveProject.federatedLimit }} {{ versionLimitFormatted }}
+          {{ t.workspace.moveProject.federatedLimitSuffix }}
         </template>
       </div>
       <CommonAlert v-if="isNotOwner" color="warning" hide-icon>
-        <template #title>
-          You can't move the project because you're not a project owner.
-        </template>
+        <template #title>{{ t.workspace.moveProject.notOwner }}</template>
       </CommonAlert>
       <div class="flex gap-2 justify-end">
         <FormButton v-if="!limitType" color="subtle" @click="$emit('cancel')">
-          Cancel
+          {{ t.workspace.moveProject.cancel }}
         </FormButton>
         <FormButton v-else color="subtle" @click="loadLatestVersion">
-          Load latest version
+          {{ t.workspace.moveProject.loadLatest }}
         </FormButton>
         <div
           v-tippy="
@@ -93,7 +88,7 @@
             :disabled="!canMoveProject?.authorized"
             @click="$emit('continue')"
           >
-            Move project
+            {{ t.workspace.moveProject.moveProject }}
           </FormButton>
         </div>
       </div>
@@ -121,6 +116,7 @@ const props = defineProps<{
   limitType?: ViewerLimitsDialogType
 }>()
 
+const { t } = useLocale()
 const route = useRoute()
 const canMoveProject = computed(() => props.project?.permissions?.canMoveToWorkspace)
 const { load: loadLatestVersion } = useLoadLatestVersion({

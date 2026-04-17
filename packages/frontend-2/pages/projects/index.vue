@@ -1,7 +1,7 @@
 <template>
   <div>
     <Portal to="navigation">
-      <HeaderNavLink :to="projectsRoute" name="Projects" :separator="false" />
+      <HeaderNavLink :to="projectsRoute" :name="t.projects.title" :separator="false" />
     </Portal>
     <ProjectsDashboard v-if="isLoggedIn" />
     <div v-else class="mx-auto">
@@ -21,5 +21,6 @@ definePageMeta({
   middleware: ['auth', 'projects-active-check']
 })
 
+const { t } = useLocale()
 const { isLoggedIn } = useActiveUser()
 </script>

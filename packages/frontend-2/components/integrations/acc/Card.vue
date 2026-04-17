@@ -81,7 +81,7 @@ const statusText = () => {
 }
 
 const openLearnMore = () => {
-  window.open('https://docs.speckle.systems/beta/acc/overview', '_blank')
+  // documentation link removed
 }
 
 const handleCTA = async () => {

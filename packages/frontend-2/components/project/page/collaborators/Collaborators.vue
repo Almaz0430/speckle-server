@@ -2,16 +2,16 @@
   <div>
     <div v-if="project" class="pt-3">
       <div class="flex justify-between space-x-2 items-center">
-        <h1 class="block text-heading-lg">Collaborators</h1>
+        <h1 class="block text-heading-lg">{{ t.project.collaborators.title }}</h1>
         <div v-tippy="canInviteTooltip">
           <FormButton :disabled="!canInvite" @click="toggleInviteDialog">
-            Invite to project
+            {{ t.project.collaborators.inviteButton }}
           </FormButton>
         </div>
       </div>
       <div class="grid xl:grid-cols-3 gap-6 mt-6">
         <div v-if="project.workspace" class="xl:col-span-1">
-          <p class="text-body-2xs text-foreground-2 font-medium mb-3">General access</p>
+          <p class="text-body-2xs text-foreground-2 font-medium mb-3">{{ t.project.collaborators.generalAccess }}</p>
           <ProjectPageCollaboratorsGeneralAccess
             :name="project.workspace?.name"
             :logo="project.workspace?.logo"
@@ -25,7 +25,7 @@
           class="flex flex-col flex-grow gap-y-3"
           :class="project.workspace ? 'xl:col-span-2' : 'col-span-3'"
         >
-          <p class="text-body-2xs text-foreground-2 font-medium">Project members</p>
+          <p class="text-body-2xs text-foreground-2 font-medium">{{ t.project.collaborators.projectMembers }}</p>
           <div>
             <ProjectPageCollaboratorsRow
               v-for="collaborator in collaboratorListItems"
@@ -45,6 +45,7 @@
   </div>
 </template>
 <script setup lang="ts">
+const { t } = useLocale()
 import type { Project } from '~~/lib/common/generated/gql/graphql'
 import type { ProjectCollaboratorListItem } from '~~/lib/projects/helpers/components'
 import { type Nullable, type StreamRoles, Roles } from '@speckle/shared'

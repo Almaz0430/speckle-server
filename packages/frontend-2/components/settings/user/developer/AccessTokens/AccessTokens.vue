@@ -1,23 +1,14 @@
 <template>
   <div class="flex flex-col gap-4">
     <SettingsSectionHeader
-      title="Access tokens"
+      :title="t.settings.developer.accessTokens.title"
       subheading
       :buttons="[
         {
           props: {
-            color: 'outline',
-            to: 'https://speckle.guide/dev/tokens.html',
-            target: '_blank',
-            external: true
-          },
-          label: 'Open docs'
-        },
-        {
-          props: {
             onClick: openCreateTokenDialog
           },
-          label: 'New token'
+          label: t.settings.developer.accessTokens.newToken
         }
       ]"
     >
@@ -100,6 +91,7 @@ import type { LayoutMenuItem } from '~~/lib/layout/helpers/components'
 const emit = defineEmits<{
   (e: 'delete', item: TokenItem): void
 }>()
+const { t } = useLocale()
 
 const {
   result: tokensResult,

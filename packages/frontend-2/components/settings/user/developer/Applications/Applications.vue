@@ -2,22 +2,13 @@
   <div class="flex flex-col gap-4">
     <SettingsSectionHeader
       subheading
-      title="Applications"
+      :title="t.settings.developer.applications.title"
       :buttons="[
-        {
-          props: {
-            color: 'outline',
-            to: 'https://speckle.guide/dev/apps.html',
-            target: '_blank',
-            external: true
-          },
-          label: 'Open docs'
-        },
         {
           props: {
             onClick: openCreateApplicationDialog
           },
-          label: 'New application'
+          label: t.settings.developer.applications.newApplication
         }
       ]"
     >
@@ -98,6 +89,7 @@ import type { LayoutMenuItem } from '~~/lib/layout/helpers/components'
 const emit = defineEmits<{
   (e: 'delete', item: ApplicationItem): void
 }>()
+const { t } = useLocale()
 
 const { result: applicationsResult, refetch: refetchApplications } = useQuery(
   developerSettingsApplicationsQuery

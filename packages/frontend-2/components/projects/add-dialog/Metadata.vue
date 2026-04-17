@@ -3,8 +3,8 @@
     <div class="flex flex-col gap-y-4 mb-2">
       <FormTextInput
         name="name"
-        label="Project name"
-        placeholder="Name"
+        :label="t.projects.createDialog.name"
+        :placeholder="t.projects.createDialog.namePlaceholder"
         color="foundation"
         :rules="[isRequired, isStringOfLength({ maxLength: 512 })]"
         auto-focus
@@ -13,8 +13,8 @@
       />
       <FormTextArea
         name="description"
-        label="Project description"
-        placeholder="Description"
+        :label="t.projects.createDialog.description"
+        :placeholder="t.projects.createDialog.descriptionPlaceholder"
         color="foundation"
         size="lg"
         show-label
@@ -22,7 +22,7 @@
         :rules="[isStringOfLength({ maxLength: 65536 })]"
       />
       <div>
-        <h3 class="label mb-2">Access permissions</h3>
+        <h3 class="label mb-2">{{ t.projects.createDialog.accessPermissions }}</h3>
         <ProjectVisibilitySelect
           v-model="visibility"
           mount-menu-on-body
@@ -37,10 +37,10 @@
         :disabled="isDisabled"
         @click="() => (supportGoBack ? $emit('back') : $emit('canceled'))"
       >
-        {{ supportGoBack ? 'Back' : 'Cancel' }}
+        {{ supportGoBack ? t.projects.createDialog.back : t.projects.createDialog.cancel }}
       </FormButton>
       <FormButton type="submit" color="primary" :loading="isDisabled">
-        Create
+        {{ t.projects.createDialog.create }}
       </FormButton>
     </div>
   </form>
@@ -52,6 +52,7 @@ import { SupportedProjectVisibility } from '~/lib/projects/helpers/visibility'
 import { isRequired, isStringOfLength } from '~~/lib/common/helpers/validation'
 import { useMixpanel } from '~~/lib/core/composables/mp'
 import { useCreateProject } from '~~/lib/projects/composables/projectManagement'
+const { t } = useLocale()
 
 type FormValues = {
   name: string

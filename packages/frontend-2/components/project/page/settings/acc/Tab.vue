@@ -1,14 +1,6 @@
 <template>
   <ProjectPageSettingsBlock :auth-check="canUpdate" title="ACC">
     <template #top-buttons>
-      <FormButton
-        color="outline"
-        to="https://docs.speckle.systems/beta/acc/overview"
-        external
-        target="_blank"
-      >
-        Docs
-      </FormButton>
       <FormButton :disabled="!canUpdate?.authorized">New</FormButton>
     </template>
     <IntegrationsAccSyncs

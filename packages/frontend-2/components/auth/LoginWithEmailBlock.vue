@@ -4,8 +4,8 @@
       <FormTextInput
         type="email"
         name="email"
-        label="E-mail"
-        placeholder="Enter your email"
+        :label="t.auth.login.email"
+        :placeholder="t.auth.login.emailPlaceholder"
         size="lg"
         color="foundation"
         :rules="emailRules"
@@ -17,8 +17,8 @@
       <FormTextInput
         type="password"
         name="password"
-        label="Password"
-        placeholder="Enter your password"
+        :label="t.auth.login.password"
+        :placeholder="t.auth.login.passwordPlaceholder"
         color="foundation"
         size="lg"
         :rules="passwordRules"
@@ -34,12 +34,12 @@
       class="mt-8 mb-4"
       :disabled="loading || !isMounted"
     >
-      Log in
+      {{ t.auth.login.loginButton }}
     </FormButton>
     <div class="mt-1 text-center text-body-xs text-foreground-3 select-none">
-      Forgot your password?
+      {{ t.auth.login.forgotPassword }}
       <NuxtLink :to="forgottenPasswordRoute" class="text-foreground">
-        Reset password
+        {{ t.auth.login.resetPassword }}
       </NuxtLink>
     </div>
   </form>
@@ -81,6 +81,7 @@ const passwordRules = [isRequired]
 const isMounted = useMounted()
 const { loginWithEmail } = useAuthManager()
 const { triggerNotification } = useGlobalToast()
+const { t } = useLocale()
 
 const inviteEmail = computed(() => props.workspaceInvite?.email)
 const isInviteForExistingUser = computed(() => !!props.workspaceInvite?.user)
@@ -95,7 +96,7 @@ const onSubmit = handleSubmit(async ({ email, password }) => {
   } catch (e) {
     triggerNotification({
       type: ToastNotificationType.Danger,
-      title: 'Login failed',
+      title: t.value.auth.login.loginFailed,
       description: `${ensureError(e).message}`
     })
   } finally {

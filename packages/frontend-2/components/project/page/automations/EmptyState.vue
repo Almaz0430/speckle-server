@@ -48,6 +48,7 @@ const props = withDefaults(
   }
 )
 
+const { t } = useLocale()
 const router = useRouter()
 const mixpanel = useMixpanel()
 
@@ -80,13 +81,12 @@ const emptyStateItems = computed(() => {
     buttons: LayoutDialogButton[]
   }[] = [
     {
-      title: "Capture your team's knowledge",
-      description:
-        'Turn tacit knowledge and monotonous process into code. Use private functions across projects in your workspace.',
+      title: t.value.project.automate.captureTitle,
+      description: t.value.project.automate.captureDesc,
       buttons: [
         {
           id: 'create-function',
-          text: 'Create function',
+          text: t.value.project.automate.createFunction,
           onClick: () => {
             mixpanel.track('Automate Onboarding Start Create Function')
             emit('new-function')
@@ -95,7 +95,7 @@ const emptyStateItems = computed(() => {
         },
         {
           id: 'view-functions',
-          text: 'View functions',
+          text: t.value.project.automate.viewFunctions,
           onClick: () => {
             router.push(functionsGalleryRoute.value)
           }
@@ -103,12 +103,11 @@ const emptyStateItems = computed(() => {
       ].filter(isVisibleAction)
     },
     {
-      title: 'Automate your workflows',
-      description:
-        'Continuously ensure project data standards, generate delivery artifacts, and more!',
+      title: t.value.project.automate.automateTitle,
+      description: t.value.project.automate.automateDesc,
       buttons: [
         {
-          text: 'Create automation',
+          text: t.value.project.automate.createAutomation,
           onClick: () => {
             mixpanel.track('Automate Onboarding Start Create Automation')
             emit('new-automation')
@@ -118,27 +117,6 @@ const emptyStateItems = computed(() => {
         }
       ]
     },
-    {
-      title: 'Learn more',
-      description:
-        "Let's chat! Find out how Automate can be customised to support and improve virtually any of your custom workflows.",
-      buttons: [
-        {
-          text: 'Book an intro call',
-          props: {
-            to: 'https://calendar.app.google/kH2EzSSMQktJ6bTZ7',
-            external: true
-          }
-        },
-        {
-          text: 'View docs',
-          props: {
-            to: 'https://speckle.guide/automate/',
-            external: true
-          }
-        }
-      ]
-    }
   ]
   return items
 })

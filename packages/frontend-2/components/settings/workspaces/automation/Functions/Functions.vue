@@ -89,17 +89,7 @@ defineProps<{
 
 const { copy } = useClipboard()
 
-const functionsSectionButtons = computed<LayoutHeaderButton[]>(() => [
-  {
-    props: {
-      color: 'outline',
-      to: 'https://speckle.guide/automate/create-function.html',
-      target: '_blank',
-      external: true
-    },
-    label: 'Open docs'
-  }
-])
+const functionsSectionButtons = computed<LayoutHeaderButton[]>(() => [])
 
 const handleCopyText = (text: string) => {
   copy(text)

@@ -6,8 +6,8 @@
         v-model="email"
         type="email"
         name="email"
-        label="Work email"
-        placeholder="Email"
+        :label="t.auth.register.workEmail"
+        :placeholder="t.auth.register.emailPlaceholder"
         size="lg"
         color="foundation"
         :rules="emailRules"
@@ -19,8 +19,8 @@
       <FormTextInput
         type="text"
         name="name"
-        label="Full name"
-        placeholder="My name"
+        :label="t.auth.register.fullName"
+        :placeholder="t.auth.register.namePlaceholder"
         size="lg"
         :rules="nameRules"
         color="foundation"
@@ -32,8 +32,8 @@
         v-model="password"
         type="password"
         name="password"
-        label="Password"
-        placeholder="Type a strong password"
+        :label="t.auth.register.password"
+        :placeholder="t.auth.register.passwordPlaceholder"
         color="foundation"
         size="lg"
         :rules="passwordRules"
@@ -53,12 +53,12 @@
       class="mt-5"
       :disabled="loading || !isMounted"
     >
-      Sign up
+      {{ t.auth.register.signUpButton }}
     </FormButton>
     <AuthRegisterTerms v-if="serverInfo.termsOfService" :server-info="serverInfo" />
     <div v-if="!inviteEmail" class="mt-2 sm:mt-4 text-center text-body-xs">
-      <span class="mr-2 text-foreground-3">Already have an account?</span>
-      <NuxtLink class="text-foreground" :to="finalLoginRoute">Log in</NuxtLink>
+      <span class="mr-2 text-foreground-3">{{ t.auth.register.alreadyHaveAccount }}</span>
+      <NuxtLink class="text-foreground" :to="finalLoginRoute">{{ t.auth.register.logIn }}</NuxtLink>
     </div>
   </form>
 </template>
@@ -91,6 +91,7 @@ const props = defineProps<{
   inviteEmail?: string
 }>()
 
+const { t } = useLocale()
 const { handleSubmit } = useForm<FormValues>()
 const router = useRouter()
 const { signUpWithEmail, inviteToken } = useAuthManager()
@@ -133,7 +134,7 @@ const onSubmit = handleSubmit(async (fullUser) => {
   } catch (e) {
     triggerNotification({
       type: ToastNotificationType.Danger,
-      title: 'Registration failed',
+      title: t.value.auth.register.registrationFailed,
       description: `${ensureError(e).message}`
     })
   } finally {

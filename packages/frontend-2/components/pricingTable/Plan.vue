@@ -356,11 +356,11 @@ const buttonTooltip = computed(() => {
   }
 
   if (isDowngrade.value) {
-    return 'Downgrading is not supported at the moment. Please contact billing@speckle.systems.'
+    return 'Downgrading is not supported at the moment. Please contact support.'
   }
 
   if (isAnnualToMonthly.value) {
-    return 'Changing from an annual to a monthly plan is currently not supported. Please contact billing@speckle.systems.'
+    return 'Changing from an annual to a monthly plan is currently not supported. Please contact support.'
   }
 
   if (
@@ -368,7 +368,7 @@ const buttonTooltip = computed(() => {
     !isYearlyIntervalSelected.value &&
     canUpgradeToPlan.value
   ) {
-    return 'Upgrading from an annual plan to a monthly plan is not supported. Please contact billing@speckle.systems.'
+    return 'Upgrading from an annual plan to a monthly plan is not supported. Please contact support.'
   }
 
   return undefined

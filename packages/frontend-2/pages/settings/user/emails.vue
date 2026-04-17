@@ -2,27 +2,27 @@
   <section>
     <div class="md:max-w-xl md:mx-auto">
       <SettingsSectionHeader
-        title="Emails addresses"
-        text="Manage your email addresses"
+        :title="t.settings.emails.title"
+        :text="t.settings.emails.subtitle"
       />
-      <SettingsSectionHeader title="Your emails" subheading />
+      <SettingsSectionHeader :title="t.settings.emails.yourEmails" subheading />
       <SettingsUserEmailList />
       <hr class="my-6 md:my-8 border-outline-2" />
-      <SettingsSectionHeader title="Add new email" subheading />
+      <SettingsSectionHeader :title="t.settings.emails.addNew" subheading />
       <div class="flex flex-col md:flex-row w-full pt-4 md:pt-6 pb-6">
         <div class="flex flex-col md:flex-row gap-x-2 w-full">
           <FormTextInput
             v-model="email"
             color="foundation"
             label-position="left"
-            label="Email address"
+            :label="t.settings.emails.emailAddress"
             name="email"
             :rules="[isEmail, isRequired]"
-            placeholder="Email address"
+            :placeholder="t.settings.emails.emailPlaceholder"
             show-label
             wrapper-classes="flex-1 py-3 md:py-0 w-full"
           />
-          <FormButton @click="onAddEmailSubmit">Add</FormButton>
+          <FormButton @click="onAddEmailSubmit">{{ t.settings.emails.addButton }}</FormButton>
         </div>
       </div>
     </div>
@@ -46,6 +46,7 @@ type FormValues = { email: string }
 
 const { handleSubmit } = useForm<FormValues>()
 const { addUserEmail } = useUserEmails()
+const { t } = useLocale()
 const email = ref('')
 
 const onAddEmailSubmit = handleSubmit(async () => {

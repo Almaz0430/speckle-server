@@ -2,18 +2,7 @@
   <div class="flex flex-col gap-4">
     <SettingsSectionHeader
       subheading
-      title="Authorized Apps"
-      :buttons="[
-        {
-          props: {
-            color: 'outline',
-            to: 'https://speckle.guide/dev/apps.html',
-            target: '_blank',
-            external: true
-          },
-          label: 'Open docs'
-        }
-      ]"
+      :title="t.settings.developer.authorizedApps.title"
     >
       <p class="text-sm pt-6 md:pt-4">
         Here you can review the apps that you have granted access to. If something looks
@@ -74,6 +63,7 @@ defineEmits<{
   (e: 'delete', item: AuthorizedAppItem): void
 }>()
 
+const { t } = useLocale()
 const { result: authorizedAppsResult } = useQuery(developerSettingsAuthorizedAppsQuery)
 
 const authorizedApps = computed(() =>

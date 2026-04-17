@@ -2,7 +2,7 @@
   <div>
     <ViewerLayoutPanel v-if="showSettings" class="p-3 pb-2">
       <span class="flex flex-col gap-1.5">
-        <label class="text-body-2xs" for="units">Units</label>
+        <label class="text-body-2xs" for="units">{{ t.viewer.measurements.units }}</label>
         <ViewerMeasurementsUnitSelect
           v-model="measurementOptions.units"
           mount-menu-on-body
@@ -14,7 +14,7 @@
         <FormRange
           v-model="measurementOptions.precision"
           name="precision"
-          label="Precision"
+          :label="t.viewer.measurements.precision"
           :min="1"
           :max="5"
           :step="1"
@@ -23,7 +23,8 @@
 
       <div class="flex flex-col gap-1.5 pb-1">
         <FormCheckbox
-          name="Chain measurements"
+          :name="t.viewer.measurements.chainMeasurements"
+          :label="t.viewer.measurements.chainMeasurements"
           label-position="right"
           label-classes="text-body-2xs font-normal"
           :model-value="measurementOptions.chain"
@@ -31,7 +32,8 @@
         />
 
         <FormCheckbox
-          name="Snap to vertices"
+          :name="t.viewer.measurements.snapToVertices"
+          :label="t.viewer.measurements.snapToVertices"
           label-position="right"
           label-classes="text-body-2xs font-normal"
           :model-value="measurementOptions.vertexSnap"
@@ -61,7 +63,7 @@
             tabindex="-1"
             @click="clearMeasurements"
           >
-            Delete all
+            {{ t.viewer.measurements.deleteAll }}
           </FormButton>
           <button
             class="size-6 flex items-center justify-center rounded-md"
@@ -89,6 +91,7 @@ interface MeasurementTypeOption {
   value: MeasurementType
 }
 
+const { t } = useLocale()
 const { measurementOptions, setMeasurementOptions, clearMeasurements } =
   useMeasurementUtilities()
 const { getTooltipProps } = useSmartTooltipDelay()
@@ -123,30 +126,30 @@ const toggleMeasurementsSnap = () => {
   })
 }
 
-const measurementTypeOptions = [
+const measurementTypeOptions = computed(() => [
   {
-    title: 'Point to Point',
+    title: t.value.viewer.measurements.pointToPoint,
     icon: 'IconMeasurePointToPoint',
     value: MeasurementType.POINTTOPOINT,
-    description: 'Measure between two points'
+    description: t.value.viewer.measurements.pointToPointDesc
   },
   {
-    title: 'Perpendicular',
+    title: t.value.viewer.measurements.perpendicular,
     icon: 'IconMeasurePerpendicular',
     value: MeasurementType.PERPENDICULAR,
-    description: 'Measure at a 90° angle'
+    description: t.value.viewer.measurements.perpendicularDesc
   },
   {
-    title: 'Area',
+    title: t.value.viewer.measurements.area,
     icon: 'IconMeasureArea',
     value: MeasurementType.AREA,
-    description: 'Measure area between points'
+    description: t.value.viewer.measurements.areaDesc
   },
   {
-    title: 'Point coordinates',
+    title: t.value.viewer.measurements.pointCoordinates,
     icon: 'IconMeasurePoint',
     value: MeasurementType.POINT,
-    description: 'Measure XYZ coordinates'
+    description: t.value.viewer.measurements.pointCoordinatesDesc
   }
-]
+])
 </script>

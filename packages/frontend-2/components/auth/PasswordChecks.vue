@@ -6,7 +6,7 @@
       <div class="flex items-center space-x-2">
         <CheckIcon v-if="ruleFits(passwordLongEnough)" class="w-4 h-4 text-success" />
         <XMarkIcon v-else class="w-4 h-4 text-foreground-2" />
-        <div>8+ characters long</div>
+        <div>{{ t.auth.passwordChecks.minLength }}</div>
       </div>
       <div class="flex items-center space-x-2">
         <CheckIcon
@@ -14,7 +14,7 @@
           class="w-4 h-4 text-success"
         />
         <XMarkIcon v-else class="w-4 h-4 text-foreground-2" />
-        <div>One number</div>
+        <div>{{ t.auth.passwordChecks.oneNumber }}</div>
       </div>
       <div class="flex items-center space-x-2">
         <CheckIcon
@@ -22,7 +22,7 @@
           class="w-4 h-4 text-success"
         />
         <XMarkIcon v-else class="w-4 h-4 text-foreground-2" />
-        <div>One lowercase letter</div>
+        <div>{{ t.auth.passwordChecks.oneLowercase }}</div>
       </div>
       <div class="flex items-center space-x-2">
         <CheckIcon
@@ -30,7 +30,7 @@
           class="w-4 h-4 text-success"
         />
         <XMarkIcon v-else class="w-4 h-4 text-foreground-2" />
-        <div>One uppercase letter</div>
+        <div>{{ t.auth.passwordChecks.oneUppercase }}</div>
       </div>
     </div>
   </div>
@@ -45,6 +45,7 @@ import {
 } from '~~/lib/auth/helpers/validation'
 
 import { CheckIcon, XMarkIcon } from '@heroicons/vue/24/solid'
+const { t } = useLocale()
 
 const props = defineProps<{
   password: string

@@ -36,22 +36,23 @@ export const useSettingsMenu = () => {
   const isAutomateEnabled = useIsAutomateModuleEnabled()
   const isMultipleEmailsEnabled = useIsMultipleEmailsEnabled().value
   const isMultiRegionEnabled = useIsMultiregionEnabled()
+  const { t } = useLocale()
 
-  const workspaceMenuItems = shallowRef<WorkspaceSettingsMenuItem[]>([
+  const workspaceMenuItems = computed<WorkspaceSettingsMenuItem[]>(() => [
     {
-      title: 'General',
+      title: t.value.settings.sidebar.general,
       name: settingsWorkspaceRoutes.general.name,
       route: (slug?: string) => settingsWorkspaceRoutes.general.route(slug),
       permission: [Roles.Workspace.Admin, Roles.Workspace.Member, Roles.Workspace.Guest]
     },
     {
-      title: 'People',
+      title: t.value.settings.sidebar.people,
       name: settingsWorkspaceRoutes.members.name,
       route: (slug?: string) => settingsWorkspaceRoutes.members.route(slug),
       permission: [Roles.Workspace.Admin, Roles.Workspace.Member]
     },
     {
-      title: 'Projects',
+      title: t.value.settings.sidebar.projects,
       name: settingsWorkspaceRoutes.projects.name,
       route: (slug?: string) => settingsWorkspaceRoutes.projects.route(slug),
       permission: [Roles.Workspace.Admin, Roles.Workspace.Member]
@@ -59,7 +60,7 @@ export const useSettingsMenu = () => {
     ...(isAutomateEnabled.value
       ? [
           {
-            title: 'Automation',
+            title: t.value.settings.sidebar.automation,
             name: settingsWorkspaceRoutes.automation.name,
             route: (slug?: string) => settingsWorkspaceRoutes.automation.route(slug),
             permission: [Roles.Workspace.Admin, Roles.Workspace.Member]
@@ -67,25 +68,25 @@ export const useSettingsMenu = () => {
         ]
       : []),
     {
-      title: 'Integrations',
+      title: t.value.settings.sidebar.integrations,
       name: settingsWorkspaceRoutes.integrations.name,
       route: (slug?: string) => settingsWorkspaceRoutes.integrations.route(slug),
       permission: [Roles.Workspace.Admin, Roles.Workspace.Member]
     },
     {
-      title: 'Security',
+      title: t.value.settings.sidebar.security,
       name: settingsWorkspaceRoutes.security.name,
       route: (slug?: string) => settingsWorkspaceRoutes.security.route(slug),
       permission: [Roles.Workspace.Admin, Roles.Workspace.Member]
     },
     {
-      title: 'Billing',
+      title: t.value.settings.sidebar.billing,
       name: settingsWorkspaceRoutes.billing.name,
       route: (slug?: string) => settingsWorkspaceRoutes.billing.route(slug),
       permission: [Roles.Workspace.Admin, Roles.Workspace.Member]
     },
     {
-      title: 'Data residency',
+      title: t.value.settings.sidebar.dataResidency,
       name: settingsWorkspaceRoutes.regions.name,
       route: (slug?: string) => settingsWorkspaceRoutes.regions.route(slug),
       permission: [Roles.Workspace.Admin, Roles.Workspace.Member],
@@ -100,46 +101,46 @@ export const useSettingsMenu = () => {
     }
   ])
 
-  const userMenuItems = shallowRef<GenericSettingsMenuItem[]>([
+  const userMenuItems = computed<GenericSettingsMenuItem[]>(() => [
     {
-      title: 'Profile',
+      title: t.value.settings.sidebar.profile,
       route: settingsUserRoutes.profile
     },
     {
-      title: 'Notifications',
+      title: t.value.settings.sidebar.notifications,
       route: settingsUserRoutes.notifications
     },
     {
-      title: 'Developer',
+      title: t.value.settings.sidebar.developer,
       route: settingsUserRoutes.developerSettings
     },
     ...(isMultipleEmailsEnabled
       ? [
           {
-            title: 'Emails',
+            title: t.value.settings.sidebar.emails,
             route: settingsUserRoutes.emails
           }
         ]
       : [])
   ])
 
-  const serverMenuItems = shallowRef<GenericSettingsMenuItem[]>([
+  const serverMenuItems = computed<GenericSettingsMenuItem[]>(() => [
     {
-      title: 'General',
+      title: t.value.settings.sidebar.general,
       route: settingsServerRoutes.general
     },
     {
-      title: 'Members',
+      title: t.value.settings.sidebar.members,
       route: settingsServerRoutes.members
     },
     {
-      title: 'Projects',
+      title: t.value.settings.sidebar.projects,
       route: settingsServerRoutes.projects
     },
     ...(isMultiRegionEnabled
       ? [
           {
-            title: 'Regions',
+            title: t.value.settings.sidebar.regions,
             route: settingsServerRoutes.regions
           }
         ]

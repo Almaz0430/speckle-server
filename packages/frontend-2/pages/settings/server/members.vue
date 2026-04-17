@@ -2,8 +2,8 @@
   <section>
     <div class="md:max-w-5xl md:mx-auto pb-6 md:pb-0">
       <SettingsSectionHeader
-        title="Members"
-        text="Manage members on your server"
+        :title="t.settings.server.members.title"
+        :text="t.settings.server.members.subtitle"
         hide-divider
       />
 
@@ -35,17 +35,18 @@ useHead({
   title: 'Settings | Server - Members'
 })
 
+const { t } = useLocale()
 const { result: invitesResult } = useQuery(getInvitesCountQuery)
 const { result: usersResult } = useQuery(getUsersCountQuery)
 
 const tabItems = computed<LayoutPageTabItem[]>(() => [
   {
-    title: 'Members',
+    title: t.value.settings.server.members.membersTab,
     id: 'members',
     count: usersResult.value?.admin?.userList?.totalCount
   },
   {
-    title: 'Pending invites',
+    title: t.value.settings.server.members.pendingInvites,
     id: 'invites',
     count: invitesResult.value?.admin?.inviteList?.totalCount
   }

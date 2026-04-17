@@ -1,34 +1,29 @@
 <template>
   <LayoutDialog v-model:open="isOpen" max-width="sm" :buttons="dialogButtons">
-    <template #header>Delete project</template>
+    <template #header>{{ t.projects.deleteDialog.title }}</template>
     <div class="flex flex-col gap-4 text-body-xs text-foreground">
       <div class="flex flex-col gap-2">
         <p>
-          Are you sure you want to
-          <span class="font-medium">permanently delete</span>
-          the
-          <span class="font-medium">"{{ project.name }}"</span>
-          project? This action
-          <span class="font-medium">cannot</span>
-          be undone.
+          {{ t.projects.deleteDialog.confirmIntro }}
+          <span class="font-medium">{{ t.projects.deleteDialog.permanentlyDelete }}</span>
+          {{ t.projects.deleteDialog.confirmOutro.split('?')[0] }}
+          <span class="font-medium">"{{ project.name }}"</span>?
+          {{ t.projects.deleteDialog.cannot.charAt(0).toUpperCase() + t.projects.deleteDialog.cannot.slice(1) }}
+          {{ t.projects.deleteDialog.beUndone }}
         </p>
         <CommonCard class="bg-foundation !py-4 text-body-2xs flex flex-row gap-y-2">
-          <p>
-            {{ modelText }}
-          </p>
-          <p>
-            {{ versionsText }}
-          </p>
+          <p>{{ modelText }}</p>
+          <p>{{ versionsText }}</p>
         </CommonCard>
       </div>
       <div class="flex flex-col gap-2">
-        <p>To confirm, type the project name below.</p>
+        <p>{{ t.projects.deleteDialog.typeToConfirm }}</p>
         <FormTextInput
           v-model="projectNameInput"
           name="projectNameConfirm"
-          label="Project name"
+          :label="t.projects.deleteDialog.projectNameLabel"
           size="lg"
-          placeholder="Project name..."
+          :placeholder="t.projects.deleteDialog.projectNamePlaceholder"
           full-width
           hide-error-message
           class="text-sm"
@@ -80,6 +75,7 @@ const props = defineProps<{
 
 const isOpen = defineModel<boolean>('open', { required: true })
 
+const { t } = useLocale()
 const deleteProject = useDeleteProject()
 const mixpanel = useMixpanel()
 
@@ -88,13 +84,13 @@ const projectNameInput = ref('')
 const modelText = computed(
   () =>
     `${props.project.models.totalCount} ${
-      props.project.models.totalCount === 1 ? 'model' : 'models'
+      props.project.models.totalCount === 1 ? t.value.projects.deleteDialog.model : t.value.projects.deleteDialog.models
     }`
 )
 const versionsText = computed(
   () =>
     `${props.project.versions.totalCount} ${
-      props.project.versions.totalCount === 1 ? 'version' : 'versions'
+      props.project.versions.totalCount === 1 ? t.value.projects.deleteDialog.version : t.value.projects.deleteDialog.versions
     }`
 )
 
@@ -111,7 +107,7 @@ const canDelete = computed((): FullPermissionCheckResultFragment => {
 
 const dialogButtons = computed<LayoutDialogButton[]>(() => [
   {
-    text: 'Cancel',
+    text: t.value.projects.deleteDialog.cancel,
     props: { color: 'outline' },
     onClick: () => {
       isOpen.value = false
@@ -119,7 +115,7 @@ const dialogButtons = computed<LayoutDialogButton[]>(() => [
     }
   },
   {
-    text: 'Delete',
+    text: t.value.projects.deleteDialog.delete,
     props: {
       color: 'danger',
 

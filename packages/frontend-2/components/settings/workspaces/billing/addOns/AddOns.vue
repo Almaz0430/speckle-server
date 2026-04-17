@@ -69,7 +69,7 @@ const contactButton = computed(() => ({
   id: 'contact-us',
   disabled: !isAdmin.value,
   onClick: () => {
-    window.location.href = 'mailto:billing@speckle.systems'
+    // contact email removed
   }
 }))
 

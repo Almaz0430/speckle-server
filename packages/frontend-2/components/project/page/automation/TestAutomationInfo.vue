@@ -30,22 +30,6 @@
           <ClipboardDocumentIcon class="h-5 w-5 text-foreground" />
         </button>
       </div>
-      <CommonTextLink
-        size="sm"
-        external
-        target="_blank"
-        to="https://speckle.guide/automate/function-testing.html"
-      >
-        Using test automations
-      </CommonTextLink>
-      <CommonTextLink
-        size="sm"
-        external
-        target="_blank"
-        to="https://speckle.guide/dev/tokens.html"
-      >
-        Create a personal access token
-      </CommonTextLink>
     </CommonCard>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="md:max-w-5xl md:mx-auto pb-6 md:pb-0">
-      <SettingsSectionHeader title="Projects" text="Manage projects on your server" />
+      <SettingsSectionHeader :title="t.settings.server.projects.title" :text="t.settings.server.projects.subtitle" />
       <SettingsSharedProjects
         v-model:search="search"
         :projects="projects"
@@ -20,6 +20,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+const { t } = useLocale()
 import { adminPanelProjectsQuery } from '~~/lib/server-management/graphql/queries'
 import { usePaginatedQuery } from '~/lib/common/composables/graphql'
 import { graphql } from '~/lib/common/generated/gql'

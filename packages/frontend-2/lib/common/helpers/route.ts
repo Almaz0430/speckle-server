@@ -19,11 +19,11 @@ export const accLoginRoute = '/authn/acc'
 export const accRoute = '/acc'
 export const connectorsRoute = '/connectors'
 export const tutorialsRoute = '/tutorials'
-export const docsPageUrl = 'https://docs.speckle.systems/'
-export const forumPageUrl = 'https://speckle.community/'
-export const guideBillingUrl = 'https://docs.speckle.systems/workspaces/billing'
+export const docsPageUrl = ''
+export const forumPageUrl = ''
+export const guideBillingUrl = ''
 export const onboardingRoute = '/onboarding'
-export const viewerDocsRoute = 'https://docs.speckle.systems/3d-viewer/interface-nav'
+export const viewerDocsRoute = ''
 
 export const settingsUserRoutes = {
   profile: '/settings/user/profile',
@@ -257,4 +257,4 @@ export const doesRouteFitTarget = (fullPathA: string, fullPathB: string) => {
   return true
 }
 
-export const LearnMoreMoveProjectsUrl = 'https://speckle.systems/pricing'
+export const LearnMoreMoveProjectsUrl = ''

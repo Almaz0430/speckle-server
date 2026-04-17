@@ -15,7 +15,7 @@
 
         <NuxtLink :to="exitSettingsRoute" class="flex items-center">
           <FormButton :icon-left="ChevronLeftIcon" hide-text color="subtle" />
-          <p class="text-body-xs font-medium text-foreground">Settings</p>
+          <p class="text-body-xs font-medium text-foreground">{{ t.settings.sidebar.settings }}</p>
         </NuxtLink>
       </div>
     </Portal>
@@ -30,12 +30,12 @@
               class="items-center gap-x-1.5 px-2.5 flex"
             >
               <ChevronLeftIcon class="h-3 w-3 text-foreground-2" />
-              <p class="text-body-xs font-medium text-foreground">Exit settings</p>
+              <p class="text-body-xs font-medium text-foreground">{{ t.settings.sidebar.exitSettings }}</p>
             </NuxtLink>
           </LayoutSidebarMenuGroup>
 
           <div class="flex flex-col gap-y-2 lg:gap-y-4">
-            <LayoutSidebarMenuGroup title="User settings">
+            <LayoutSidebarMenuGroup :title="t.settings.sidebar.userSettings">
               <template #title-icon>
                 <IconAccount class="size-4" />
               </template>
@@ -51,7 +51,7 @@
                 />
               </NuxtLink>
             </LayoutSidebarMenuGroup>
-            <LayoutSidebarMenuGroup v-if="isServerAdmin" title="Server settings">
+            <LayoutSidebarMenuGroup v-if="isServerAdmin" :title="t.settings.sidebar.serverSettings">
               <template #title-icon>
                 <IconServer class="size-4" />
               </template>
@@ -69,7 +69,7 @@
             </LayoutSidebarMenuGroup>
             <LayoutSidebarMenuGroup
               v-if="showWorkspaceSettings"
-              title="Workspace settings"
+              :title="t.settings.sidebar.workspaceSettings"
             >
               <template #title-icon>
                 <IconWorkspaces class="size-4" />
@@ -139,6 +139,7 @@ graphql(`
   }
 `)
 
+const { t } = useLocale()
 const isWorkspacesEnabled = useIsWorkspacesEnabled()
 const activeWorkspaceSlug = useActiveWorkspaceSlug()
 const settingsMenuState = useSettingsMenuState()

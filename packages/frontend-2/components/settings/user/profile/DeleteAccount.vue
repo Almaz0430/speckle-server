@@ -1,13 +1,12 @@
 <template>
   <div>
     <div class="flex flex-col space-y-6">
-      <SettingsSectionHeader title="Delete account" subheading />
+      <SettingsSectionHeader :title="t.settings.profile.deleteAccount.title" subheading />
       <CommonCard class="text-body-xs bg-foundation">
-        We will delete all projects where you are the sole owner, and any associated
-        data. We will ask you to type in your email address and press the delete button.
+        {{ t.settings.profile.deleteAccount.description }}
       </CommonCard>
       <div>
-        <FormButton @click="toggleDeleteDialog">Delete account</FormButton>
+        <FormButton @click="toggleDeleteDialog">{{ t.settings.profile.deleteAccount.deleteButton }}</FormButton>
       </div>
     </div>
 
@@ -25,6 +24,7 @@ defineProps<{
   user: SettingsUserProfileDeleteAccount_UserFragment
 }>()
 
+const { t } = useLocale()
 const showDeleteDialog = ref(false)
 
 function toggleDeleteDialog() {
