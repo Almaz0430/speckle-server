@@ -9,11 +9,11 @@
         <div class="flex flex-col">
           <CommonBadge
             v-if="!project.workspace?.id && isWorkspacesEnabled && isOwner"
-            v-tippy="'As the project owner you can move this project to a workspace'"
+            v-tippy="t.projects.card.ownerCanMove"
             class="mb-2 max-w-max"
             rounded
           >
-            Ready to move
+            {{ t.projects.card.readyToMove }}
           </CommonBadge>
           <NuxtLink
             :to="projectRoute(project.id)"
@@ -25,7 +25,7 @@
             v-tippy="updatedAt.full"
             class="text-body-3xs mb-1 text-foreground-2 select-none"
           >
-            Updated
+            {{ t.projects.card.updated }}
             {{ updatedAt.relative }}
           </span>
           <span
@@ -58,29 +58,25 @@
               color="outline"
               :icon-right="ChevronRightIcon"
             >
-              {{
-                `${modelItemTotalCount} ${
-                  modelItemTotalCount === 1 ? 'model' : 'models'
-                }`
-              }}
+              {{ $t('projects.card.modelCount', modelItemTotalCount) }}
             </FormButton>
-            <div
-              v-if="!project.workspace?.id && isWorkspacesEnabled"
-              v-tippy="
-                !isOwner
-                  ? 'Only the project owner can move this project into a workspace'
-                  : undefined
-              "
-            >
-              <FormButton
-                size="sm"
-                color="outline"
-                :disabled="!isOwner"
-                @click="$emit('moveProject')"
+              <div
+                v-if="!project.workspace?.id && isWorkspacesEnabled"
+                v-tippy="
+                  !isOwner
+                    ? t.projects.card.onlyOwnerCanMove
+                    : undefined
+                "
               >
-                Move project
-              </FormButton>
-            </div>
+                <FormButton
+                  size="sm"
+                  color="outline"
+                  :disabled="!isOwner"
+                  @click="$emit('moveProject')"
+                >
+                  {{ t.projects.card.moveProject }}
+                </FormButton>
+              </div>
           </div>
         </div>
       </div>
@@ -130,6 +126,8 @@ import { workspaceRoute } from '~/lib/common/helpers/route'
 import { RoleInfo, type StreamRoles } from '@speckle/shared'
 import type { FileAreaUploadingPayload } from '~/lib/form/helpers/fileUpload'
 import { getModelItemRoute } from '~/lib/projects/helpers/models'
+
+const { t } = useLocale()
 
 defineEmits<{
   (e: 'moveProject'): void

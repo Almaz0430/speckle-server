@@ -13,14 +13,14 @@
 import { useActiveUser } from '~~/lib/auth/composables/activeUser'
 import { projectsRoute } from '~/lib/common/helpers/route'
 
-useHead({
-  title: 'Projects'
-})
-
 definePageMeta({
   middleware: ['auth', 'projects-active-check']
 })
 
 const { t } = useLocale()
 const { isLoggedIn } = useActiveUser()
+
+useHead(computed(() => ({
+  title: t.value.projects.title
+})))
 </script>

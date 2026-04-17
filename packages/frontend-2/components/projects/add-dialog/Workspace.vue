@@ -3,17 +3,19 @@
     <WorkspaceMoveProjectSelectWorkspace
       :project="undefined"
       :checker="(w) => w.permissions.canCreateProject"
-      subheading="New projects can only be created within a workspace."
+      :subheading="t.projects.addDialog.workspaceSubheading"
       @workspace-selected="onWorkspaceSelected"
     />
     <FormButton color="outline" full-width @click="navigateTo(workspaceCreateRoute)">
-      Create a new workspace
+      {{ t.projects.addDialog.createWorkspace }}
     </FormButton>
   </div>
 </template>
 <script setup lang="ts">
 import type { WorkspaceMoveProjectSelectWorkspace_WorkspaceFragment } from '~/lib/common/generated/gql/graphql'
 import { workspaceCreateRoute } from '~/lib/common/helpers/route'
+
+const { t } = useLocale()
 
 const emit = defineEmits<{
   'workspace-selected': [WorkspaceMoveProjectSelectWorkspace_WorkspaceFragment]

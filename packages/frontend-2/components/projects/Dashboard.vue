@@ -37,7 +37,7 @@
               id="projects-to-move"
               v-model="filterProjectsToMove"
               label-classes="!font-normal select-none"
-              name="Projects to move"
+              :name="t.projects.filters.projectsToMove"
             />
           </div>
         </div>

@@ -138,6 +138,9 @@ const en = {
     noProjects: 'No projects found',
     createFirst: 'Create your first project',
     projectsDescription: 'Projects are the place where your models and their versions live.',
+    filters: {
+      projectsToMove: 'Projects to move'
+    },
     deleteDialog: {
       title: 'Delete project',
       confirmIntro: 'Are you sure you want to',
@@ -166,6 +169,31 @@ const en = {
       back: 'Back',
       cancel: 'Cancel',
       create: 'Create'
+    },
+    card: {
+      readyToMove: 'Ready to move',
+      updated: 'Updated',
+      ownerCanMove: 'As the project owner you can move this project to a workspace',
+      onlyOwnerCanMove: 'Only the project owner can move this project into a workspace',
+      moveProject: 'Move project',
+      viewPricing: 'View pricing',
+      modelCount: '{count} model | {count} models'
+    },
+    moveToWorkspace: {
+      bannerTitleProject: 'Move this project to a workspace',
+      bannerTitleProjects: 'Move your projects to a workspace',
+      description: 'Personal projects are being phased out. Move your projects to a workspace to create new projects and models, invite new project collaborators, and view comments and versions older than 7 days. By January 1st 2026, all projects will be deleted if not moved into a workspace.',
+      onlyOwnerTooltip: 'Only the project owner can move this project into a workspace',
+      moveProject: 'Move project',
+      moveProjects: 'Move projects'
+    },
+    addDialog: {
+      workspaceSubheading: 'New projects can only be created within a workspace.',
+      createWorkspace: 'Create a new workspace'
+    },
+    hiddenProjects: {
+      title: '{count} project is hidden | {count} projects are hidden',
+      description: 'in SSO-protected workspaces. To view {pronoun}, authenticate with:'
     }
   },
   header: {

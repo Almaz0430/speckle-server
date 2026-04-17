@@ -7,23 +7,20 @@
           <h3 class="text-heading mt-2">
             {{
               projectId
-                ? `Move this project to a workspace`
-                : `Move your projects to a workspace`
+                ? t.projects.moveToWorkspace.bannerTitleProject
+                : t.projects.moveToWorkspace.bannerTitleProjects
             }}
           </h3>
 
           <div class="text-body-xs">
             <div class="mb-4">
-              Personal projects are being phased out. Move your projects to a workspace
-              to create new projects and models, invite new project collaborators, and
-              view comments and versions older than 7 days. By January 1st 2026, all
-              projects will be deleted if not moved into a workspace.
+              {{ t.projects.moveToWorkspace.description }}
             </div>
             <div class="flex gap-2">
               <div
                 v-tippy="
                   disableButton
-                    ? 'Only the project owner can move this project into a workspace'
+                    ? t.projects.moveToWorkspace.onlyOwnerTooltip
                     : undefined
                 "
               >
@@ -31,7 +28,7 @@
                   :disabled="disableButton"
                   @click="$emit('moveProject', projectId)"
                 >
-                  {{ projectId ? 'Move project' : 'Move projects' }}
+                  {{ projectId ? t.projects.moveToWorkspace.moveProject : t.projects.moveToWorkspace.moveProjects }}
                 </FormButton>
               </div>
               <FormButton
@@ -40,7 +37,7 @@
                 external
                 target="_blank"
               >
-                View pricing
+                {{ t.projects.card.viewPricing }}
               </FormButton>
             </div>
           </div>
@@ -53,6 +50,8 @@
 <script setup lang="ts">
 import { ExclamationCircleIcon } from '@heroicons/vue/24/outline'
 import { LearnMoreMoveProjectsUrl } from '~/lib/common/helpers/route'
+
+const { t } = useLocale()
 
 defineEmits(['moveProject'])
 

@@ -2,11 +2,9 @@
   <CommonCard class="mb-4 bg-foundation text-body-xs !py-4">
     <p class="text-foreground">
       <span class="font-medium">
-        {{ hiddenItemCount }} project{{ hiddenItemCount === 1 ? '' : 's' }}
-        {{ hiddenItemCount === 1 ? 'is' : 'are' }} hidden
+        {{ $t('projects.hiddenProjects.title', hiddenItemCount) }}
       </span>
-      in SSO-protected workspaces. To view {{ hiddenItemCount === 1 ? 'it' : 'them' }},
-      authenticate with:
+      {{ $t('projects.hiddenProjects.description', { pronoun: hiddenItemCount === 1 ? 'it' : 'them' }) }}
     </p>
     <div class="flex flex-wrap gap-2 mt-2">
       <FormButton
@@ -29,6 +27,8 @@
 import { graphql } from '~~/lib/common/generated/gql'
 import type { ProjectsHiddenProjectWarning_UserFragment } from '~~/lib/common/generated/gql/graphql'
 import { workspaceSsoRoute } from '~/lib/common/helpers/route'
+
+const { t } = useLocale()
 
 graphql(`
   fragment ProjectsHiddenProjectWarning_User on User {
