@@ -100,18 +100,8 @@
           @click="toggleActivePanel('devMode')"
         />
         <ViewerControlsButtonToggle
-          v-tippy="
-            getTooltipProps('Documentation', {
-              placement: 'right'
-            })
-          "
-          :icon="BookOpen"
-          secondary
-          @click="openDocs"
-        />
-        <ViewerControlsButtonToggle
           v-if="isIntercomEnabled"
-          v-tippy="getTooltipProps('Get help')"
+          v-tippy="getTooltipProps(t.viewer.controls.help)"
           :icon="CircleQuestionMark"
           secondary
           @click="openIntercomChat"
@@ -199,18 +189,15 @@ import {
 import { type Nullable, isNonNullable } from '@speckle/shared'
 import { useFunctionRunsStatusSummary } from '~/lib/automate/composables/runStatus'
 import { useIntercomEnabled } from '~~/lib/intercom/composables/enabled'
-import { viewerDocsRoute } from '~~/lib/common/helpers/route'
-import { useAreSavedViewsEnabled } from '~/lib/viewer/composables/savedViews/general'
 import {
-  Camera,
   CodeXml,
-  BookOpen,
-  Box,
   ListFilter,
   MessageSquareText,
   CircleQuestionMark
 } from 'lucide-vue-next'
+import { useLocale } from '~/composables/useLocale'
 import { useViewerPanelsUtilities } from '~/lib/viewer/composables/setup/panels'
+import { useAreSavedViewsEnabled } from '~/lib/viewer/composables/savedViews/general'
 import type { ActivePanel } from '~/lib/viewer/helpers/sceneExplorer'
 
 // TODO: Refactor all of this event business and just read/write panels state directly
@@ -229,6 +216,7 @@ const isMobile = breakpoints.smaller('sm')
 const isTablet = breakpoints.smaller('lg')
 const isLargerThanLg = breakpoints.greater('lg')
 const { getTooltipProps } = useSmartTooltipDelay()
+const { t } = useLocale()
 const isSavedViewsEnabled = useAreSavedViewsEnabled()
 const isWorkspacesEnabled = useIsWorkspacesEnabled()
 const { $intercom } = useNuxtApp()
@@ -362,10 +350,6 @@ const toggleActivePanel = (panel: ActivePanel) => {
 
 const forceClosePanel = () => {
   activePanel.value = 'none'
-}
-
-const openDocs = () => {
-  window.open(viewerDocsRoute, '_blank')
 }
 
 const openIntercomChat = () => {

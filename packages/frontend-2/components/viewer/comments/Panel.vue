@@ -1,7 +1,7 @@
 <template>
   <ViewerLayoutSidePanel>
     <template #title>
-      <span>Discussions</span>
+      <span>{{ t.viewer.panels.discussions }}</span>
     </template>
     <template #actions>
       <div class="flex items-center leading-none">
@@ -54,6 +54,7 @@ import {
 import { useMixpanel } from '~~/lib/core/composables/mp'
 import type { LayoutMenuItem } from '~~/lib/layout/helpers/components'
 import { HorizontalDirection } from '~~/lib/common/composables/window'
+import { useLocale } from '~/composables/useLocale'
 
 enum ActionTypes {
   HideBubbles = 'hide-bubbles',
@@ -100,6 +101,7 @@ const menuId = useId()
 
 const showVisibilityOptions = ref(false)
 const settingsIcon = resolveComponent('IconViewerSettings') as ConcreteComponent
+const { t } = useLocale()
 
 const loadedVersionsOnly = computed({
   get: () =>
@@ -139,17 +141,17 @@ watch(includeArchived, (newVal) =>
 const actionsItems = computed<LayoutMenuItem[][]>(() => [
   [
     {
-      title: 'Show in 3D model',
+      title: t.viewer.panels.showIn3DModel,
       id: ActionTypes.HideBubbles,
       active: !hideBubbles.value
     },
     {
-      title: `Show resolved (${commentThreadsMetadata.value?.totalArchivedCount || 0})`,
+      title: t.viewer.panels.showResolved.replace('{count}', (commentThreadsMetadata.value?.totalArchivedCount || 0).toString()),
       id: ActionTypes.IncludeArchived,
       active: !!includeArchived.value
     },
     {
-      title: 'Exclude threads from other versions',
+      title: t.viewer.panels.excludeOtherVersions,
       id: ActionTypes.LoadedVersionsOnly,
       active: !!loadedVersionsOnly.value
     }

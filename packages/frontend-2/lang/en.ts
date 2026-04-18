@@ -1,7 +1,7 @@
 const en = {
   auth: {
     login: {
-      title: 'PM Viewer login',
+      title: 'ProjectManager login',
       noAccount: "Don't have an account?",
       signUp: 'Sign up',
       continueWithSso: 'Continue with SSO',
@@ -16,7 +16,7 @@ const en = {
       orSignUpWithEmail: 'Or sign up with your email'
     },
     register: {
-      title: 'Create your PM Viewer account',
+      title: 'Create your ProjectManager account',
       inviteOnly: 'This server is invite only',
       inviteOnlyDescription: 'If you have received an invitation email, please follow the instructions in it.',
       alreadyHaveAccount: 'Already have an account?',
@@ -47,9 +47,32 @@ const en = {
       oneUppercase: 'One uppercase letter'
     },
     sso: {
-      title: 'PM Viewer SSO login',
+      title: 'ProjectManager SSO login',
       workEmail: 'Your work email',
       emailPlaceholder: 'Enter your email'
+    },
+    authorize: {
+      title: 'Authorize application',
+      heading: 'Authorize application',
+      notYou: 'Not you? Switch accounts',
+      wantsAccess: 'wants to access your ProjectManager account.',
+      appInfo: 'App info & requested permissions',
+      author: 'Author:',
+      description: 'Description:',
+      permissions: 'Permissions:',
+      deny: 'Deny',
+      authorize: 'Authorize',
+      success: 'Success',
+      denied: 'Denied',
+      error: 'Error',
+      connected: 'is connected to your',
+      account: 'account.',
+      notConnected: 'has not been connected to your',
+      couldNotResolve: 'Could not resolve app.',
+      goHome: 'Go home',
+      redirecting: 'You will be redirected automatically, please wait a moment.',
+      malformedResponse: 'Malformed authorization response, please contact site admins.',
+      authorizationFailed: 'App authorization failed'
     }
   },
   connectors: {
@@ -82,6 +105,50 @@ const en = {
       unresponsive: 'unresponsive.',
       continueQuestion: 'Do you want to continue?',
       confirm: 'Continue'
+    },
+    controls: {
+      measure: 'Measure',
+      section: 'Section',
+      explode: 'Explode',
+      viewModes: 'View modes',
+      lightControls: 'Light controls',
+      models: 'Models',
+      filters: 'Filters',
+      discussions: 'Discussions',
+      savedViews: 'Saved views',
+      devMode: 'Dev mode',
+      documentation: 'Documentation',
+      help: 'Get help',
+      cameraControls: 'Camera controls',
+      reset: 'Reset',
+      done: 'Done'
+    },
+    embed: {
+      updated: 'Updated',
+      created: 'Created',
+      multipleModels: 'Multiple models'
+    },
+    panels: {
+      models: 'Models',
+      detachedObject: 'Detached object',
+      detachedObjects: 'Detached objects',
+      noModelsLoaded: 'No models loaded, yet.',
+      addModel: 'Add model',
+      filters: 'Filters',
+      resetFilters: 'Reset',
+      addFilter: 'Add filter',
+      addNewFilter: 'Add new filter',
+      results: '{count} result | {count} results',
+      discussions: 'Discussions',
+      showIn3DModel: 'Show in 3D model',
+      showResolved: 'Show resolved ({count})',
+      excludeOtherVersions: 'Exclude threads from other versions',
+      loadedVersionsOnly: 'Loaded versions only',
+      noFilters: 'There are no filters, yet.',
+      byModel: 'By model',
+      byObjectUrl: 'By object URL',
+      modelAdded: 'Model added successfully',
+      zoomToFit: 'Zoom to fit'
     }
   },
   project: {
@@ -177,7 +244,8 @@ const en = {
       onlyOwnerCanMove: 'Only the project owner can move this project into a workspace',
       moveProject: 'Move project',
       viewPricing: 'View pricing',
-      modelCount: '{count} model | {count} models'
+      modelCount: '{count} model | {count} models',
+      created: 'Created'
     },
     moveToWorkspace: {
       bannerTitleProject: 'Move this project to a workspace',
@@ -348,7 +416,7 @@ const en = {
         title: 'Regions',
         subtitle: 'Manage data regions'
       },
-      version: 'PM Viewer Version',
+      version: 'ProjectManager Version',
       currentVersion: 'Current version:',
       newVersionAvailable: 'New version available',
       upToDate: 'You are up to date',

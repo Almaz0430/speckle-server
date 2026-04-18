@@ -3,7 +3,7 @@
     id="newsletter-consent-checkbox"
     v-model="newsletterConsent"
     name="newsletter"
-    label="Opt in for exclusive PM Viewer news and tips"
+    label="Opt in for exclusive ProjectManager news and tips"
     class="text-body-2xs"
   />
 </template>

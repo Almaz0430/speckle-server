@@ -12,9 +12,9 @@
     />
     <ViewerLayoutSidePanel v-else>
       <template #title>
-        <span v-if="objects.length === 1">Detached object</span>
-        <span v-else-if="objects.length > 1">Detached objects</span>
-        <span v-else>Models</span>
+        <span v-if="objects.length === 1">{{ t.viewer.panels.detachedObject }}</span>
+        <span v-else-if="objects.length > 1">{{ t.viewer.panels.detachedObjects }}</span>
+        <span v-else>{{ t.viewer.panels.models }}</span>
       </template>
       <template #actions>
         <ViewerModelsActions
@@ -112,8 +112,8 @@
           class="flex flex-col items-center justify-center gap-4 h-full -mt-8"
         >
           <IllustrationEmptystateModels />
-          <span class="text-body-xs text-foreground-2">No models loaded, yet.</span>
-          <FormButton @click="showAddModel = true">Add model</FormButton>
+          <span class="text-body-xs text-foreground-2">{{ t.viewer.panels.noModelsLoaded }}</span>
+          <FormButton @click="showAddModel = true">{{ t.viewer.panels.addModel }}</FormButton>
         </div>
       </div>
     </ViewerLayoutSidePanel>
@@ -131,6 +131,7 @@ import {
 import { ModelsSubView, type ExplorerNode } from '~~/lib/viewer/helpers/sceneExplorer'
 import type { ViewerLoadedResourcesQuery } from '~~/lib/common/generated/gql/graphql'
 import type { Get } from 'type-fest'
+import { useLocale } from '~/composables/useLocale'
 import { useDiffUtilities, useSelectionUtilities } from '~~/lib/viewer/composables/ui'
 import {
   useTreeManagement,
@@ -177,6 +178,7 @@ const {
   expandNodesToShowObject,
   treeStateManager
 } = useTreeManagement()
+const { t } = useLocale()
 
 const hasObjects = computed(() => objects.value.length > 0)
 

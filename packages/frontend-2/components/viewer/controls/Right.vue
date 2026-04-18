@@ -23,7 +23,7 @@
         @click="trackAndzoomExtentsOrSelection()"
       />
       <ViewerControlsButtonToggle
-        v-tippy="getTooltipProps('Camera controls', { placement: 'left' })"
+        v-tippy="getTooltipProps(t.viewer.controls.cameraControls, { placement: 'left' })"
         :icon="Video"
         :active="activePanel === 'cameraControls'"
         @click="toggleActivePanel('cameraControls')"
@@ -47,6 +47,7 @@ import { onClickOutside, useBreakpoints } from '@vueuse/core'
 import { TailwindBreakpoints } from '~~/lib/common/helpers/tailwind'
 import type { Nullable } from '@speckle/shared'
 import { useEmbed } from '~/lib/viewer/composables/setup/embed'
+import { useLocale } from '~/composables/useLocale'
 import { Fullscreen, Video } from 'lucide-vue-next'
 
 type ActivePanel = 'none' | 'cameraControls'
@@ -65,6 +66,7 @@ const { zoomExtentsOrSelection } = useCameraUtilities()
 const { registerShortcuts, getShortcutDisplayText, shortcuts } = useViewerShortcuts()
 const mixpanel = useMixpanel()
 const { getTooltipProps } = useSmartTooltipDelay()
+const { t } = useLocale()
 const { isEnabled: isEmbedEnabled } = useEmbed()
 
 const breakpoints = useBreakpoints(TailwindBreakpoints)

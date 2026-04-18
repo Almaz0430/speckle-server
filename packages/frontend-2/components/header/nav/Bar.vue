@@ -34,7 +34,7 @@
               color="outline"
               class="hidden md:flex"
             >
-              Sign in
+              {{ t.header.userMenu.login }}
             </FormButton>
             <!-- Profile dropdown -->
             <HeaderNavUserMenu :login-url="loginUrl" />
@@ -49,6 +49,7 @@
 import { useActiveUser } from '~~/lib/auth/composables/activeUser'
 import { loginRoute } from '~~/lib/common/helpers/route'
 import type { Optional } from '@speckle/shared'
+import { useLocale } from '~/composables/useLocale'
 
 defineProps<{
   hideUserNav?: boolean

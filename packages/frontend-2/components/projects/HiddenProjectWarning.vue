@@ -2,9 +2,9 @@
   <CommonCard class="mb-4 bg-foundation text-body-xs !py-4">
     <p class="text-foreground">
       <span class="font-medium">
-        {{ $t('projects.hiddenProjects.title', hiddenItemCount) }}
+        {{ t.projects.hiddenProjects.title.replace('{count}', hiddenItemCount.toString()) }}
       </span>
-      {{ $t('projects.hiddenProjects.description', { pronoun: hiddenItemCount === 1 ? 'it' : 'them' }) }}
+      {{ t.projects.hiddenProjects.description.replace('{pronoun}', hiddenItemCount === 1 ? 'it' : 'them') }}
     </p>
     <div class="flex flex-wrap gap-2 mt-2">
       <FormButton

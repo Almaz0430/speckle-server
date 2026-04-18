@@ -7,10 +7,10 @@
   >
     <div
       v-if="!minimal"
-      class="text-sm mt-0 font-medium"
+      class="text-sm mt-0 font-bold pl-2"
       :class="showTextOnMobile ? '' : 'hidden md:flex'"
     >
-      PM Viewer
+      <span class="text-foreground">Project</span><span class="text-blue-500">Manager</span>
     </div>
   </Component>
 </template>

@@ -58,7 +58,7 @@
               color="outline"
               :icon-right="ChevronRightIcon"
             >
-              {{ $t('projects.card.modelCount', modelItemTotalCount) }}
+              {{ t.projects.card.modelCount.replace('{count}', modelItemTotalCount.toString()) }}
             </FormButton>
               <div
                 v-if="!project.workspace?.id && isWorkspacesEnabled"

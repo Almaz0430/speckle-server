@@ -1,6 +1,6 @@
 <template>
   <ViewerLayoutSidePanel max-height-class="max-h-[calc(100dvh-5rem)]" disable-scrollbar>
-    <template #title>Filters</template>
+    <template #title>{{ t.viewer.panels.filters }}</template>
     <template #actions>
       <div class="flex gap-x-0.5 items-center">
         <FormButton
@@ -10,7 +10,7 @@
           tabindex="-1"
           @click="resetFilters()"
         >
-          Reset
+          {{ t.viewer.panels.resetFilters }}
         </FormButton>
         <FormButton
           v-tippy="showPropertySelection ? undefined : 'Add new filter'"
@@ -31,7 +31,7 @@
         class="flex items-center pr-4 text-body-3xs text-foreground-2 select-none"
       >
         <span>
-          {{ filteredObjectsCount }} result{{ filteredObjectsCount === 1 ? '' : 's' }}
+          {{ t.viewer.panels.results.replace('{count}', filteredObjectsCount.toString()) }}
         </span>
       </div>
     </div>
@@ -60,7 +60,7 @@
             hide-text
             @click="addNewEmptyFilter"
           >
-            Add filter
+            {{ t.viewer.panels.addFilter }}
           </FormButton>
         </div>
       </div>
@@ -99,6 +99,7 @@ import { useFilterUtilities } from '~/lib/viewer/composables/filtering/filtering
 import { onKeyStroke, onClickOutside } from '@vueuse/core'
 import { useFilteredObjectsCount } from '~/lib/viewer/composables/filtering/counts'
 import type { Nullable } from '@speckle/shared'
+import { useLocale } from '~/composables/useLocale'
 
 const {
   filters: { propertyFilters },
@@ -114,6 +115,7 @@ const mp = useMixpanel()
 const {
   filters: { hasAnyFiltersApplied }
 } = useInjectedViewerInterfaceState()
+const { t } = useLocale()
 
 const showPropertySelection = ref(false)
 const propertySelectionRef = ref<HTMLElement>()

@@ -3,7 +3,7 @@ import type { Translations } from './en'
 const ru: Translations = {
   auth: {
     login: {
-      title: 'Вход в PM Viewer',
+      title: 'Вход в ProjectManager',
       noAccount: 'Нет аккаунта?',
       signUp: 'Зарегистрироваться',
       continueWithSso: 'Войти через SSO',
@@ -18,7 +18,7 @@ const ru: Translations = {
       orSignUpWithEmail: 'Или зарегистрируйтесь по email'
     },
     register: {
-      title: 'Создайте аккаунт PM Viewer',
+      title: 'Создайте аккаунт ProjectManager',
       inviteOnly: 'Сервер только по приглашениям',
       inviteOnlyDescription: 'Если вы получили письмо с приглашением, следуйте инструкциям в нём.',
       alreadyHaveAccount: 'Уже есть аккаунт?',
@@ -49,9 +49,32 @@ const ru: Translations = {
       oneUppercase: 'Одна заглавная буква'
     },
     sso: {
-      title: 'Вход через SSO — PM Viewer',
+      title: 'Вход через SSO — ProjectManager',
       workEmail: 'Рабочий email',
       emailPlaceholder: 'Введите email'
+    },
+    authorize: {
+      title: 'Авторизация приложения',
+      heading: 'Авторизация приложения',
+      notYou: 'Это не вы? Войти под другим аккаунтом',
+      wantsAccess: 'хочет получить доступ к вашему аккаунту ProjectManager.',
+      appInfo: 'Информация о приложении и запрашиваемые разрешения',
+      author: 'Автор:',
+      description: 'Описание:',
+      permissions: 'Разрешения:',
+      deny: 'Отклонить',
+      authorize: 'Авторизовать',
+      success: 'Успешно',
+      denied: 'Отклонено',
+      error: 'Ошибка',
+      connected: 'подключено к вашему',
+      account: 'аккаунту.',
+      notConnected: 'не было подключено к вашему',
+      couldNotResolve: 'Не удалось определить приложение.',
+      goHome: 'На главную',
+      redirecting: 'Вы будете перенаправлены автоматически, пожалуйста, подождите.',
+      malformedResponse: 'Некорректный ответ авторизации, обратитесь к администраторам сайта.',
+      authorizationFailed: 'Ошибка авторизации приложения'
     }
   },
   connectors: {
@@ -84,6 +107,50 @@ const ru: Translations = {
       unresponsive: 'зависание браузера.',
       continueQuestion: 'Продолжить?',
       confirm: 'Продолжить'
+    },
+    controls: {
+      measure: 'Измерить',
+      section: 'Сечение',
+      explode: 'Взрыв',
+      viewModes: 'Режимы просмотра',
+      lightControls: 'Управление светом',
+      models: 'Модели',
+      filters: 'Фильтры',
+      discussions: 'Обсуждения',
+      savedViews: 'Сохраненные виды',
+      devMode: 'Режим разработчика',
+      documentation: 'Документация',
+      help: 'Помощь',
+      cameraControls: 'Управление камерой',
+      reset: 'Сброс',
+      done: 'Готово'
+    },
+    embed: {
+      updated: 'Обновлено',
+      created: 'Создано',
+      multipleModels: 'Несколько моделей'
+    },
+    panels: {
+      models: 'Модели',
+      detachedObject: 'Отсоединенный объект',
+      detachedObjects: 'Отсоединенные объекты',
+      noModelsLoaded: 'Модели еще не загружены.',
+      addModel: 'Добавить модель',
+      filters: 'Фильтры',
+      resetFilters: 'Сбросить',
+      addFilter: 'Добавить фильтр',
+      addNewFilter: 'Добавить новый фильтр',
+      results: '{count} результат | {count} результата | {count} результатов',
+      discussions: 'Обсуждения',
+      showIn3DModel: 'Показать в 3D модели',
+      showResolved: 'Показать решенные ({count})',
+      excludeOtherVersions: 'Исключить потоки из других версий',
+      loadedVersionsOnly: 'Только загруженные версии',
+      noFilters: 'Фильтров пока нет.',
+      byModel: 'По модели',
+      byObjectUrl: 'По URL объекта',
+      modelAdded: 'Модель успешно добавлена',
+      zoomToFit: 'Показать в масштабе'
     }
   },
   project: {
@@ -179,7 +246,8 @@ const ru: Translations = {
       onlyOwnerCanMove: 'Только владелец проекта может переместить его в рабочее пространство',
       moveProject: 'Переместить проект',
       viewPricing: 'Смотреть тарифы',
-      modelCount: '{count} модель | {count} модели | {count} моделей'
+      modelCount: '{count} модель | {count} модели | {count} моделей',
+      created: 'Создан'
     },
     moveToWorkspace: {
       bannerTitleProject: 'Переместите этот проект в рабочее пространство',
@@ -350,7 +418,7 @@ const ru: Translations = {
         title: 'Регионы',
         subtitle: 'Управление регионами данных'
       },
-      version: 'Версия PM Viewer',
+      version: 'Версия ProjectManager',
       currentVersion: 'Текущая версия:',
       newVersionAvailable: 'Доступна новая версия',
       upToDate: 'У вас актуальная версия',

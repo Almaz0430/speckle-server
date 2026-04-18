@@ -18,7 +18,7 @@ const { isDarkTheme } = useTheme()
 
 useHead({
   // Title suffix
-  titleTemplate: (titleChunk) => (titleChunk ? `${titleChunk} | PM Viewer` : 'PM Viewer'),
+  titleTemplate: (titleChunk) => (titleChunk ? `${titleChunk} | ProjectManager` : 'ProjectManager'),
   htmlAttrs: {
     class: computed(() => (isDarkTheme.value ? `dark` : ``)),
     lang: 'en'

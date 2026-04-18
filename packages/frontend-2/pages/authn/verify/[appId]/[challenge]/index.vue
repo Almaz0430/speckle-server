@@ -6,7 +6,7 @@
         <h1
           class="text-center text-heading-xl inline-block text-foreground bg-clip-text"
         >
-          Authorize application
+          {{ t.auth.authorize.heading }}
         </h1>
         <template v-if="activeUser && app && !action">
           <div class="space-y-2 flex flex-col">
@@ -19,7 +19,7 @@
               :icon-right="ArrowsRightLeftIcon"
               @click="onSwitchAccounts"
             >
-              Not you? Switch accounts
+              {{ t.auth.authorize.notYou }}
             </CommonTextLink>
           </div>
           <div class="text-foreground h4 text-center">
@@ -30,7 +30,7 @@
               />
               {{ app?.name }}
             </span>
-            wants to access your PM Viewer account.
+            {{ t.auth.authorize.wantsAccess }}
           </div>
           <div v-if="!trustByDefault" class="w-full">
             <Disclosure v-slot="{ open }">
@@ -40,7 +40,7 @@
                 <div class="flex space-x-2 items-center">
                   <InformationCircleIcon class="h-5 w-5 shrink-0" />
                   <span class="font-medium text-left">
-                    App info & requested permissions ({{ app.scopes.length }})
+                    {{ t.auth.authorize.appInfo }} ({{ app.scopes.length }})
                   </span>
                 </div>
                 <ChevronUpIcon
@@ -55,14 +55,14 @@
                 <table v-if="app.author || app.description?.length" class="table-fixed">
                   <tbody>
                     <tr v-if="app.author">
-                      <td class="font-medium pr-2 w-[100px]">Author:</td>
+                      <td class="font-medium pr-2 w-[100px]">{{ t.auth.authorize.author }}</td>
                       <td class="inline-flex space-x-1 items-center">
                         <UserAvatar :user="app.author" size="sm" />
                         <span>{{ app.author.name }}</span>
                       </td>
                     </tr>
                     <tr v-if="app.description?.length">
-                      <td class="align-top font-medium pr-2">Description:</td>
+                      <td class="align-top font-medium pr-2">{{ t.auth.authorize.description }}</td>
                       <td>
                         {{ app.description }}
                       </td>
@@ -70,7 +70,7 @@
                   </tbody>
                 </table>
                 <div class="space-y-4">
-                  <div class="font-medium">Permissions:</div>
+                  <div class="font-medium">{{ t.auth.authorize.permissions }}</div>
                   <!-- <ul v-if="false" class="list-disc list-inside space-y-4">
                   <li v-for="scope in app.scopes" :key="scope?.name">
                     <span>{{ scope.description }}</span>
@@ -97,10 +97,10 @@
           </div>
           <div class="flex space-x-2 w-full">
             <FormButton color="outline" full-width :disabled="loading" @click="deny">
-              Deny
+              {{ t.auth.authorize.deny }}
             </FormButton>
             <FormButton full-width :disabled="loading" @click="allow">
-              Authorize
+              {{ t.auth.authorize.authorize }}
             </FormButton>
           </div>
         </template>
@@ -118,33 +118,33 @@
             />
             <span class="text-heading-xl">
               <template v-if="action">
-                {{ action === ChosenAction.Allow ? 'Success' : 'Denied' }}
+                {{ action === ChosenAction.Allow ? t.auth.authorize.success : t.auth.authorize.denied }}
               </template>
-              <template v-else>Error</template>
+              <template v-else>{{ t.auth.authorize.error }}</template>
             </span>
           </div>
           <div class="text-center">
             <template v-if="app">
               <template v-if="action === ChosenAction.Allow">
                 <span class="font-medium text-primary">{{ app?.name }}</span>
-                is connected to your
-                <span class="font-medium">PM Viewer</span>
-                account.
+                {{ t.auth.authorize.connected }}
+                <span class="font-medium">ProjectManager</span>
+                {{ t.auth.authorize.account }}
               </template>
               <template v-else>
                 <span class="font-medium text-primary">{{ app?.name }}</span>
-                has not been connected to your
-                <span class="font-medium">PM Viewer</span>
-                account.
+                {{ t.auth.authorize.notConnected }}
+                <span class="font-medium">ProjectManager</span>
+                {{ t.auth.authorize.account }}
               </template>
             </template>
             <div v-else class="flex space-x-2 items-center">
-              <span>Could not resolve app.</span>
-              <CommonTextLink :to="homeRoute">Go home</CommonTextLink>
+              <span>{{ t.auth.authorize.couldNotResolve }}</span>
+              <CommonTextLink :to="homeRoute">{{ t.auth.authorize.goHome }}</CommonTextLink>
             </div>
           </div>
           <div v-if="action" class="label-light text-foreground-2">
-            You will be redirected automatically, please wait a moment.
+            {{ t.auth.authorize.redirecting }}
           </div>
         </div>
       </div>
@@ -192,8 +192,10 @@ definePageMeta({
 })
 
 useHead({
-  title: 'Authorize application'
+  title: computed(() => t.auth.authorize.title)
 })
+
+const { t } = useLocale()
 
 const apiOrigin = useApiOrigin()
 const route = useRoute()
@@ -285,7 +287,7 @@ const allow = async () => {
   try {
     const allowRes = await $fetch<{ redirectUrl: string }>(allowUrl.value)
     if (!allowRes?.redirectUrl) {
-      throw new Error('Malformed authorization response, please contact site admins.')
+      throw new Error(t.auth.authorize.malformedResponse)
     }
 
     // Finally redirect
@@ -294,7 +296,7 @@ const allow = async () => {
   } catch (err) {
     triggerNotification({
       type: ToastNotificationType.Danger,
-      title: 'App authorization failed',
+      title: t.auth.authorize.authorizationFailed,
       description:
         err instanceof FetchError
           ? (err.data as string) || err.statusMessage || err.message

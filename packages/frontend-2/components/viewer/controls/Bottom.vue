@@ -26,7 +26,7 @@
       <span class="flex items-center">
         <component :is="panels[activePanel].icon" class="h-4 w-4 ml-1 mr-1.5" />
         <p class="text-body-2xs text-foreground">
-          {{ panels[activePanel].name }}
+          {{ panels[activePanel].name.value }}
         </p>
       </span>
       <div class="flex items-center gap-1">
@@ -37,10 +37,10 @@
           color="subtle"
           @click="onReset"
         >
-          Reset
+          {{ t.viewer.controls.reset }}
         </FormButton>
         <FormButton tabindex="-1" size="sm" @click="onActivePanelClose">
-          Done
+          {{ t.viewer.controls.done }}
         </FormButton>
       </div>
 
@@ -113,10 +113,12 @@ const mixpanel = useMixpanel()
 const activePanel = ref<ActivePanel>(ActivePanel.none)
 const viewerLoaded = ref(false)
 
+const { t } = useLocale()
+
 const panels = shallowRef({
   [ActivePanel.measurements]: {
     id: ActivePanel.measurements,
-    name: 'Measure',
+    name: computed(() => t.value.viewer.controls.measure),
     icon: Ruler,
     tooltip: getShortcutDisplayText(shortcuts.ToggleMeasurements, {
       format: 'separate'
@@ -125,28 +127,28 @@ const panels = shallowRef({
   },
   [ActivePanel.sectionBox]: {
     id: ActivePanel.sectionBox,
-    name: 'Section',
+    name: computed(() => t.value.viewer.controls.section),
     icon: Scissors,
     tooltip: getShortcutDisplayText(shortcuts.ToggleSectionBox, { format: 'separate' }),
     extraClasses: ''
   },
   [ActivePanel.explode]: {
     id: ActivePanel.explode,
-    name: 'Explode',
+    name: computed(() => t.value.viewer.controls.explode),
     icon: Layers2,
     tooltip: getShortcutDisplayText(shortcuts.ToggleExplode, { format: 'separate' }),
     extraClasses: 'hidden md:flex'
   },
   [ActivePanel.viewModes]: {
     id: ActivePanel.viewModes,
-    name: 'View modes',
+    name: computed(() => t.value.viewer.controls.viewModes),
     icon: Glasses,
     tooltip: getShortcutDisplayText(shortcuts.ToggleViewModes, { format: 'separate' }),
     extraClasses: ''
   },
   [ActivePanel.lightControls]: {
     id: ActivePanel.lightControls,
-    name: 'Light controls',
+    name: computed(() => t.value.viewer.controls.lightControls),
     icon: Sun,
     tooltip: getShortcutDisplayText(shortcuts.ToggleLightControls, {
       format: 'separate'

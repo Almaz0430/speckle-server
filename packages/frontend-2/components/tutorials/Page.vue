@@ -8,7 +8,7 @@
             <h1 class="text-heading-lg">Tutorials</h1>
           </div>
           <p class="text-body-sm text-foreground-2">
-            Get started with PM Viewer with step-by-step instructions for all skill
+            Get started with ProjectManager with step-by-step instructions for all skill
             levels.
           </p>
         </div>

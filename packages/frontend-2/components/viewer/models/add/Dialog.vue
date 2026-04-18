@@ -1,6 +1,6 @@
 <template>
   <LayoutDialog v-model:open="open" max-width="md">
-    <template #header>Add model</template>
+    <template #header>{{ t.viewer.panels.addModel }}</template>
     <div class="flex flex-col gap-y-4">
       <LayoutTabsHorizontal v-model:active-item="activeTab" :items="tabItems">
         <template #default="{ activeItem }">
@@ -23,6 +23,7 @@ import { useCameraUtilities } from '~/lib/viewer/composables/ui'
 import { useMixpanel } from '~~/lib/core/composables/mp'
 import type { LayoutTabItem } from '~~/lib/layout/helpers/components'
 import { useInjectedViewerRequestedResources } from '~~/lib/viewer/composables/setup'
+import { useLocale } from '~/composables/useLocale'
 
 const emit = defineEmits<{
   (e: 'update:open', v: boolean): void
@@ -35,10 +36,11 @@ const props = defineProps<{
 const { items } = useInjectedViewerRequestedResources()
 const { zoom } = useCameraUtilities()
 const { triggerNotification } = useGlobalToast()
+const { t } = useLocale()
 
 const tabItems = ref<LayoutTabItem[]>([
-  { title: 'By model', id: 'model' },
-  { title: 'By object URL', id: 'object' }
+  { title: t.value.viewer.panels.byModel, id: 'model' },
+  { title: t.value.viewer.panels.byObjectUrl, id: 'object' }
 ])
 
 const activeTab = ref(tabItems.value[0])
@@ -53,9 +55,9 @@ const mp = useMixpanel()
 const triggerZoomNotification = () => {
   triggerNotification({
     type: ToastNotificationType.Success,
-    title: 'Model added successfully',
+    title: t.value.viewer.panels.modelAdded,
     cta: {
-      title: 'Zoom to fit',
+      title: t.value.viewer.panels.zoomToFit,
       onClick: () => {
         zoom()
       }

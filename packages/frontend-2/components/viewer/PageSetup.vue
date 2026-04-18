@@ -7,14 +7,14 @@
           <template v-if="project?.workspace && isWorkspacesEnabled">
             <HeaderNavLink
               :to="workspaceRoute(project?.workspace.slug)"
-              name="Projects"
+              :name="t.dashboard.sidebar.projects"
               :separator="false"
             />
           </template>
           <HeaderNavLink
             v-else
             :to="projectsRoute"
-            name="Projects"
+            :name="t.dashboard.sidebar.projects"
             :separator="false"
           />
           <HeaderNavLink :to="`/projects/${project?.id}`" :name="project?.name" />
@@ -115,6 +115,7 @@ import dayjs from 'dayjs'
 import { graphql } from '~~/lib/common/generated/gql'
 import { useEmbed } from '~/lib/viewer/composables/setup/embed'
 import { projectsRoute, workspaceRoute } from '~~/lib/common/helpers/route'
+import { useLocale } from '~/composables/useLocale'
 import { useMixpanel } from '~/lib/core/composables/mp'
 import { parseUrlParameters, resourceBuilder } from '@speckle/shared/viewer/route'
 import { ViewerLimitsDialogType } from '~/lib/projects/helpers/limits'
@@ -149,6 +150,7 @@ graphql(`
 
 const route = useRoute()
 const isWorkspacesEnabled = useIsWorkspacesEnabled()
+const { t } = useLocale()
 const breakpoints = useBreakpoints(TailwindBreakpoints)
 const isMobile = breakpoints.smaller('sm')
 
@@ -215,7 +217,7 @@ const title = computed(() => {
     const projectName = project.value.name || ''
 
     if (modelCount > 1) {
-      return projectName ? `Multiple models - ${projectName}` : 'Multiple models'
+      return projectName ? `${t.value.viewer.embed.multipleModels} - ${projectName}` : t.value.viewer.embed.multipleModels
     } else if (modelCount === 1) {
       const modelName = project.value.models.items[0].name || ''
       return projectName ? `${modelName} - ${projectName}` : modelName
@@ -246,9 +248,9 @@ const embedName = computed(() => {
 
 const lastUpdate = computed(() => {
   if (project.value?.models?.items[0] && project.value.models.items[0].updatedAt) {
-    return 'Updated ' + dayjs(project.value.models.items[0].updatedAt).fromNow()
+    return t.value.viewer.embed.updated + ' ' + dayjs(project.value.models.items[0].updatedAt).fromNow()
   } else if (project.value) {
-    return 'Created ' + dayjs(project.value.createdAt).fromNow()
+    return t.value.viewer.embed.created + ' ' + dayjs(project.value.createdAt).fromNow()
   } else return undefined
 })
 
