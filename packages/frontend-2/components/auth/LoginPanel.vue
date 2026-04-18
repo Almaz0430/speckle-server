@@ -70,7 +70,7 @@ const props = withDefaults(
   }>(),
   {
     dialogMode: false,
-    title: () => useLocale().t.value.auth.login.title
+    title: () => useLocale().t.auth.login.title
   }
 )
 

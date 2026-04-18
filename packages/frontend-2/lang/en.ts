@@ -152,20 +152,150 @@ const en = {
     }
   },
   project: {
+    tabs: {
+      models: 'Models',
+      discussions: 'Discussions',
+      automations: 'Automations',
+      collaborators: 'Collaborators',
+      settings: 'Settings',
+      dashboards: 'Dashboards',
+      materials: 'Materials',
+      sheets: 'Sheets'
+    },
     collaborators: {
       title: 'Collaborators',
       inviteButton: 'Invite to project',
       generalAccess: 'General access',
-      projectMembers: 'Project members'
+      projectMembers: 'Project members',
+      manageTooltip: 'Manage collaborators',
+      viewTooltip: 'View collaborators'
     },
-    automate: {
-      captureTitle: "Capture your team's knowledge",
-      captureDesc: 'Turn tacit knowledge and monotonous process into code. Use private functions across projects in your workspace.',
-      createFunction: 'Create function',
-      viewFunctions: 'View functions',
-      automateTitle: 'Automate your workflows',
-      automateDesc: 'Continuously ensure project data standards, generate delivery artifacts, and more!',
-      createAutomation: 'Create automation'
+    discussions: {
+      includeResolved: 'Include resolved'
+    },
+    acc: {
+      title: 'ACC'
+    },
+    models: {
+      searchPlaceholder: 'Search models...',
+      filterByMembers: 'Filter by members',
+      filterBySources: 'Filter by sources',
+      allMembers: 'All members',
+      allSources: 'All sources',
+      uploadHistory: 'Model upload history',
+      modelName: 'Model name',
+      modelDescription: 'Model description',
+      namePlaceholder: 'model/name/here',
+      descriptionPlaceholder: 'Description'
+    },
+    automations: {
+      searchPlaceholder: 'Search automations...',
+      enabled: 'Enabled',
+      disabled: 'Disabled',
+      functionSettings: 'Function settings',
+      functionRelease: 'Function release',
+      targetModel: 'Target model',
+      deleteAutomation: 'Delete automation',
+      language: 'Language'
+    },
+    team: {
+      projectAccessLevel: 'Project access level'
+    },
+    webhooks: {
+      noWebhooksYet: 'No webhooks, yet.',
+      url: 'URL',
+      events: 'Events',
+      chooseEvents: 'Choose events',
+      webhookName: 'Webhook name',
+      secret: 'Secret',
+      deleteWebhook: 'Delete webhook',
+      disableExistingEmbeds: 'Disable existing embeds',
+      confirmVisibilityChange: 'Confirm visibility change',
+      deleteToken: 'Delete token'
+    },
+    settings: {
+      title: 'Settings',
+      general: 'General',
+      webhooks: 'Webhooks',
+      tokens: 'Tokens',
+      integrations: 'Integrations',
+      tokensDescription: 'These tokens are used to embed non-public Speckle projects.',
+      embedTokens: 'Embed tokens',
+      createdAt: 'Created at',
+      lastUsed: 'Last used',
+      createdBy: 'Created by',
+      resourceId: 'Resource ID',
+      delete: 'Delete',
+      webhooksDescription: 'Subscribe to events and get notified in real time. Use to trigger CI apps, automation workflows, and more.',
+      new: 'New',
+      enabled: 'Enabled',
+      data: 'Data',
+      triggerEvents: 'Trigger events',
+      edit: 'Edit',
+      noEventsYet: 'No events yet',
+      webhookEnabled: 'Webhook Enabled',
+      webhookDisabled: 'Webhook Disabled',
+      failedToUpdateWebhook: 'Failed to update webhook',
+      generalSettings: {
+        projectInfo: 'Project info',
+        name: 'Name',
+        description: 'Description',
+        visibility: 'Visibility',
+        access: 'Access',
+        discussions: 'Discussions',
+        leave: 'Leave project',
+        delete: 'Delete project',
+        projectName: 'Project name',
+        projectDescription: 'Project description',
+        cancel: 'Cancel',
+        update: 'Update',
+        unsavedChanges: 'Unsaved changes',
+        unsavedChangesText: 'You have unsaved changes. Do you want to save them before leaving?',
+        discardChanges: 'Discard changes',
+        saveChanges: 'Save changes',
+        chooseAccess: 'Choose who can access this project.',
+        public: 'Public',
+        publicDesc: 'Anyone with the link can view',
+        workspace: 'Workspace',
+        workspaceDesc: 'All workspace members can view',
+        private: 'Private',
+        privateDesc: 'Only for project members and admins',
+        commentsControl: 'Control who can leave comments on this project.',
+        anyone: 'Anyone',
+        anyoneDesc: 'Anyone can comment',
+        collaboratorsOnly: 'Collaborators',
+        collaboratorsOnlyDesc: 'Only collaborators can comment',
+        privateProjectComment: 'Only collaborators can comment on private projects',
+        leaveProject: 'Leave project',
+        leaveProjectDesc: 'Remove yourself from this project. To join again you will need to get invited.',
+        deleteProject: 'Delete project',
+        deleteProjectDesc: 'Permanently delete this project and all of its content from the Speckle platform. This action is not reversible.'
+      }
+    },
+    materials: {
+      title: 'Material Quantities',
+      subtitle: 'Aggregated data from latest versions of all models',
+      modelLabel: 'Model:',
+      all: 'All',
+      refresh: 'Refresh',
+      loading: 'Loading...',
+      error: 'Error loading data:',
+      noData: 'No material data. Publish Revit models through the plugin.',
+      noDataInModel: 'No material data in this model.',
+      category: 'Category:',
+      other: 'Other',
+      material: 'Material',
+      volume: 'Volume, m³',
+      area: 'Area, m²',
+      elements: 'Elements',
+      total: 'Total',
+      progress: 'Processed objects:',
+      summary: {
+        totalMaterials: 'Total materials',
+        totalVolume: 'Total volume, m³',
+        totalArea: 'Total area, m²',
+        totalElements: 'Elements with data'
+      }
     }
   },
   workspace: {

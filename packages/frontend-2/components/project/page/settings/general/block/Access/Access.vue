@@ -1,7 +1,7 @@
 <template>
-  <ProjectPageSettingsBlock background title="Access" :auth-check="canUpdate">
+  <ProjectPageSettingsBlock background :title="t.project.settings.generalSettings.access" :auth-check="canUpdate">
     <template #introduction>
-      <p class="text-body-xs text-foreground">Choose who can access this project.</p>
+      <p class="text-body-xs text-foreground">{{ t.project.settings.generalSettings.chooseAccess }}</p>
     </template>
     <FormRadioGroup
       v-model="selectedOption"
@@ -36,6 +36,8 @@ import {
 import { graphql } from '~~/lib/common/generated/gql'
 import type { ProjectPageSettingsGeneralBlockAccess_ProjectFragment } from '~~/lib/common/generated/gql/graphql'
 
+const { t } = useLocale()
+
 graphql(`
   fragment ProjectPageSettingsGeneralBlockAccess_Project on Project {
     id
@@ -69,24 +71,24 @@ const pendingVisibility = ref<SupportedProjectVisibility | null>(null)
 const radioOptions = computed(() => [
   {
     value: SupportedProjectVisibility.Public,
-    title: 'Public',
-    introduction: 'Anyone with the link can view',
+    title: t.project.settings.generalSettings.public,
+    introduction: t.project.settings.generalSettings.publicDesc,
     icon: GlobeAltIcon
   },
   ...(props.project.workspaceId
     ? [
         {
           value: SupportedProjectVisibility.Workspace,
-          introduction: 'All workspace members can view',
-          title: 'Workspace',
+          introduction: t.project.settings.generalSettings.workspaceDesc,
+          title: t.project.settings.generalSettings.workspace,
           icon: BuildingOfficeIcon
         }
       ]
     : []),
   {
     value: SupportedProjectVisibility.Private,
-    title: 'Private',
-    introduction: 'Only for project members and admins',
+    title: t.project.settings.generalSettings.private,
+    introduction: t.project.settings.generalSettings.privateDesc,
     icon: LockClosedIcon
   }
 ])

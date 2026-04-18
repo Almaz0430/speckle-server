@@ -4,10 +4,10 @@
       v-if="canLeaveProject.authorized"
       :auth-check="canLeaveProject"
       background
-      title="Leave project"
+      :title="t.project.settings.generalSettings.leaveProject"
     >
       <p>
-        Remove yourself from this project. To join again you will need to get invited.
+        {{ t.project.settings.generalSettings.leaveProjectDesc }}
       </p>
       <template #bottom-buttons>
         <FormButton
@@ -15,7 +15,7 @@
           :disabled="!canLeaveProject.authorized"
           @click="showLeaveDialog = true"
         >
-          Leave project
+          {{ t.project.settings.generalSettings.leaveProject }}
         </FormButton>
       </template>
     </ProjectPageSettingsBlock>
@@ -30,6 +30,8 @@
 <script setup lang="ts">
 import { graphql } from '~~/lib/common/generated/gql'
 import type { ProjectPageSettingsGeneralBlockLeave_ProjectFragment } from '~~/lib/common/generated/gql/graphql'
+
+const { t } = useLocale()
 
 graphql(`
   fragment ProjectPageSettingsGeneralBlockLeave_Project on Project {

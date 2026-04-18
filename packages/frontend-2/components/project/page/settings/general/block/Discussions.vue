@@ -1,8 +1,8 @@
 <template>
-  <ProjectPageSettingsBlock background title="Discussions" :auth-check="canUpdate">
+  <ProjectPageSettingsBlock background :title="t.project.settings.generalSettings.discussions" :auth-check="canUpdate">
     <template #introduction>
       <p class="text-body-xs text-foreground">
-        Control who can leave comments on this project.
+        {{ t.project.settings.generalSettings.commentsControl }}
       </p>
     </template>
     <FormRadioGroup
@@ -24,6 +24,8 @@ import {
 } from '~/lib/projects/helpers/visibility'
 import { graphql } from '~~/lib/common/generated/gql'
 import type { ProjectPageSettingsGeneralBlockDiscussions_ProjectFragment } from '~~/lib/common/generated/gql/graphql'
+
+const { t } = useLocale()
 
 graphql(`
   fragment ProjectPageSettingsGeneralBlockDiscussions_Project on Project {
@@ -62,19 +64,19 @@ const canUpdate = computed(() => props.project.permissions.canUpdateAllowPublicC
 const radioOptions = computed(() => [
   {
     value: CommentPermission.Anyone,
-    title: 'Anyone',
-    introduction: 'Anyone can comment',
+    title: t.project.settings.generalSettings.anyone,
+    introduction: t.project.settings.generalSettings.anyoneDesc,
     icon: UserGroupIcon
   },
   {
     value: CommentPermission.TeamMembers,
-    title: 'Collaborators',
-    introduction: 'Only collaborators can comment',
+    title: t.project.settings.generalSettings.collaboratorsOnly,
+    introduction: t.project.settings.generalSettings.collaboratorsOnlyDesc,
     icon: UserCircleIcon,
     help:
       castToSupportedVisibility(props.project.visibility) !==
       SupportedProjectVisibility.Public
-        ? 'Only collaborators can comment on private projects'
+        ? t.project.settings.generalSettings.privateProjectComment
         : undefined
   }
 ])

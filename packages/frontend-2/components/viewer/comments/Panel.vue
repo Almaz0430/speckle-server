@@ -101,7 +101,7 @@ const menuId = useId()
 
 const showVisibilityOptions = ref(false)
 const settingsIcon = resolveComponent('IconViewerSettings') as ConcreteComponent
-const { t } = useLocale()
+const { t, pluralize } = useLocale()
 
 const loadedVersionsOnly = computed({
   get: () =>
@@ -146,7 +146,7 @@ const actionsItems = computed<LayoutMenuItem[][]>(() => [
       active: !hideBubbles.value
     },
     {
-      title: t.viewer.panels.showResolved.replace('{count}', (commentThreadsMetadata.value?.totalArchivedCount || 0).toString()),
+      title: pluralize(t.viewer.panels.showResolved, commentThreadsMetadata.value?.totalArchivedCount || 0),
       id: ActionTypes.IncludeArchived,
       active: !!includeArchived.value
     },

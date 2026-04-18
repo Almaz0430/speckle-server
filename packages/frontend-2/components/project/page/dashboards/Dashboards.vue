@@ -11,5 +11,5 @@ const attrs = useAttrs() as {
   project: ProjectPageProjectFragment
 }
 
-const projectId = computed(() => attrs.project.id)
+const projectId = computed(() => attrs.project?.id)
 </script>

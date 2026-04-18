@@ -153,23 +153,6 @@ const ru: Translations = {
       zoomToFit: 'Показать в масштабе'
     }
   },
-  project: {
-    collaborators: {
-      title: 'Участники',
-      inviteButton: 'Пригласить в проект',
-      generalAccess: 'Общий доступ',
-      projectMembers: 'Участники проекта'
-    },
-    automate: {
-      captureTitle: 'Сохраните знания команды',
-      captureDesc: 'Превратите неявные знания и монотонные процессы в код. Используйте приватные функции в проектах рабочего пространства.',
-      createFunction: 'Создать функцию',
-      viewFunctions: 'Просмотр функций',
-      automateTitle: 'Автоматизируйте рабочие процессы',
-      automateDesc: 'Обеспечьте соответствие данных проекта стандартам, создавайте артефакты и многое другое!',
-      createAutomation: 'Создать автоматизацию'
-    }
-  },
   workspace: {
     moveProject: {
       title: 'Переместите проекты в рабочее пространство:',
@@ -264,6 +247,153 @@ const ru: Translations = {
     hiddenProjects: {
       title: '{count} проект скрыт | {count} проекта скрыто | {count} проектов скрыто',
       description: 'в рабочих пространствах с SSO-защитой. Чтобы {pronoun} увидеть, войдите через:'
+    }
+  },
+  project: {
+    tabs: {
+      models: 'Модели',
+      discussions: 'Обсуждения',
+      automations: 'Автоматизация',
+      collaborators: 'Участники',
+      settings: 'Настройки',
+      dashboards: 'Дашборды',
+      materials: 'Материалы',
+      sheets: 'Листы'
+    },
+    collaborators: {
+      title: 'Участники',
+      inviteButton: 'Пригласить в проект',
+      generalAccess: 'Общий доступ',
+      projectMembers: 'Участники проекта',
+      manageTooltip: 'Управление участниками',
+      viewTooltip: 'Просмотр участников'
+    },
+    discussions: {
+      includeResolved: 'Показать решённые'
+    },
+    acc: {
+      title: 'ACC'
+    },
+    models: {
+      searchPlaceholder: 'Поиск моделей...',
+      filterByMembers: 'Фильтр по участникам',
+      filterBySources: 'Фильтр по источникам',
+      allMembers: 'Все участники',
+      allSources: 'Все источники',
+      uploadHistory: 'История загрузки моделей',
+      modelName: 'Название модели',
+      modelDescription: 'Описание модели',
+      namePlaceholder: 'model/name/here',
+      descriptionPlaceholder: 'Описание'
+    },
+    automations: {
+      searchPlaceholder: 'Поиск автоматизаций...',
+      enabled: 'Включено',
+      disabled: 'Отключено',
+      functionSettings: 'Настройки функции',
+      functionRelease: 'Релиз функции',
+      targetModel: 'Целевая модель',
+      deleteAutomation: 'Удалить автоматизацию',
+      language: 'Язык'
+    },
+    team: {
+      projectAccessLevel: 'Уровень доступа к проекту'
+    },
+    webhooks: {
+      noWebhooksYet: 'Вебхуков пока нет.',
+      url: 'URL',
+      events: 'События',
+      chooseEvents: 'Выберите события',
+      webhookName: 'Название вебхука',
+      secret: 'Секрет',
+      deleteWebhook: 'Удалить вебхук',
+      disableExistingEmbeds: 'Отключить существующие встраивания',
+      confirmVisibilityChange: 'Подтвердить изменение видимости',
+      deleteToken: 'Удалить токен'
+    },
+    settings: {
+      title: 'Настройки',
+      general: 'Основные',
+      webhooks: 'Вебхуки',
+      tokens: 'Токены',
+      integrations: 'Интеграции',
+      tokensDescription: 'Эти токены используются для встраивания непубличных проектов Speckle.',
+      embedTokens: 'Токены для встраивания',
+      createdAt: 'Создано',
+      lastUsed: 'Последнее использование',
+      createdBy: 'Создано',
+      resourceId: 'ID ресурса',
+      delete: 'Удалить',
+      webhooksDescription: 'Подпишитесь на события и получайте уведомления в реальном времени. Используйте для запуска CI-приложений, автоматизации рабочих процессов и многого другого.',
+      new: 'Новый',
+      enabled: 'Включено',
+      data: 'Данные',
+      triggerEvents: 'События триггера',
+      edit: 'Редактировать',
+      noEventsYet: 'Событий пока нет',
+      webhookEnabled: 'Вебхук включён',
+      webhookDisabled: 'Вебхук отключён',
+      failedToUpdateWebhook: 'Не удалось обновить вебхук',
+      generalSettings: {
+        projectInfo: 'Информация о проекте',
+        name: 'Название',
+        description: 'Описание',
+        visibility: 'Видимость',
+        access: 'Доступ',
+        discussions: 'Обсуждения',
+        leave: 'Покинуть проект',
+        delete: 'Удалить проект',
+        projectName: 'Название проекта',
+        projectDescription: 'Описание проекта',
+        cancel: 'Отмена',
+        update: 'Обновить',
+        unsavedChanges: 'Несохранённые изменения',
+        unsavedChangesText: 'У вас есть несохранённые изменения. Хотите сохранить их перед уходом?',
+        discardChanges: 'Отменить изменения',
+        saveChanges: 'Сохранить изменения',
+        chooseAccess: 'Выберите, кто может получить доступ к этому проекту.',
+        public: 'Публичный',
+        publicDesc: 'Любой человек с ссылкой может просматривать',
+        workspace: 'Рабочее пространство',
+        workspaceDesc: 'Все участники рабочего пространства могут просматривать',
+        private: 'Приватный',
+        privateDesc: 'Только для участников проекта и администраторов',
+        commentsControl: 'Управляйте тем, кто может оставлять комментарии к этому проекту.',
+        anyone: 'Любой',
+        anyoneDesc: 'Любой может комментировать',
+        collaboratorsOnly: 'Участники',
+        collaboratorsOnlyDesc: 'Только участники могут комментировать',
+        privateProjectComment: 'Только участники могут комментировать приватные проекты',
+        leaveProject: 'Покинуть проект',
+        leaveProjectDesc: 'Удалите себя из этого проекта. Чтобы присоединиться снова, вам нужно будет получить приглашение.',
+        deleteProject: 'Удалить проект',
+        deleteProjectDesc: 'Навсегда удалите этот проект и всё его содержимое из платформы Speckle. Это действие необратимо.'
+      }
+    },
+    materials: {
+      title: 'Объёмы материалов',
+      subtitle: 'Агрегированные данные по последним версиям всех моделей',
+      modelLabel: 'Модель:',
+      all: 'Все',
+      refresh: 'Обновить',
+      loading: 'Загрузка...',
+      error: 'Ошибка загрузки данных:',
+      noData: 'Нет данных о материалах. Опубликуйте модели Revit через плагин.',
+      noDataInModel: 'В этой модели нет данных о материалах.',
+      category: 'Категория:',
+      other: 'Прочее',
+      material: 'Материал',
+      volume: 'Объём, м³',
+      area: 'Площадь, м²',
+      elements: 'Элементов',
+      total: 'Итого',
+      progress: 'Обработано объектов:',
+      summary: {
+        totalMaterials: 'Всего материалов',
+        totalVolume: 'Общий объём, м³',
+        totalArea: 'Общая площадь, м²',
+        totalElements: 'Элементов с данными'
+      }
     }
   },
   header: {

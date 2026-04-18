@@ -1,18 +1,18 @@
 <template>
-  <ProjectPageSettingsBlock :auth-check="canRead" title="Tokens">
+  <ProjectPageSettingsBlock :auth-check="canRead" :title="t.project.settings.tokens">
     <template #introduction>
       <p class="text-body-xs text-foreground">
-        These tokens are used to embed non-public Speckle projects.
+        {{ t.project.settings.tokensDescription }}
       </p>
     </template>
 
-    <h3 class="text-heading-sm mt-6 mb-4">Embed tokens</h3>
+    <h3 class="text-heading-sm mt-6 mb-4">{{ t.project.settings.embedTokens }}</h3>
     <LayoutTable
       :columns="[
-        { id: 'createdAt', header: 'Created at', classes: 'col-span-3' },
-        { id: 'lastUsed', header: 'Last used', classes: 'col-span-3' },
-        { id: 'createdBy', header: 'Created by', classes: 'col-span-3' },
-        { id: 'resourceIdString', header: 'Resource ID', classes: 'col-span-3' }
+        { id: 'createdAt', header: t.project.settings.createdAt, classes: 'col-span-3' },
+        { id: 'lastUsed', header: t.project.settings.lastUsed, classes: 'col-span-3' },
+        { id: 'createdBy', header: t.project.settings.createdBy, classes: 'col-span-3' },
+        { id: 'resourceIdString', header: t.project.settings.resourceId, classes: 'col-span-3' }
       ]"
       :items="embedTokens"
       :buttons="
@@ -20,7 +20,7 @@
           ? [
               {
                 icon: TrashIcon,
-                label: 'Delete',
+                label: t.project.settings.delete,
                 action: openDeleteTokenDialog
               }
             ]
@@ -69,6 +69,8 @@ import { graphql } from '~/lib/common/generated/gql'
 import { useDeleteEmbedToken } from '~~/lib/projects/composables/tokenManagement'
 import { usePaginatedQuery } from '~/lib/common/composables/graphql'
 import type { Nullable } from '@speckle/shared'
+
+const { t } = useLocale()
 
 graphql(`
   fragment ProjectPageSettingsTokens_EmbedToken on EmbedToken {

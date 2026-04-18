@@ -106,6 +106,8 @@ export const projectRoute = (
     | 'settings'
     | 'acc'
     | 'dashboards'
+    | 'materials'
+    | 'sheets'
 ) => {
   let res = `/projects/${id}`
   if (tab && tab !== 'models') {

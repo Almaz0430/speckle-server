@@ -1,11 +1,10 @@
 <template>
   <div>
-    <ProjectPageSettingsBlock :auth-check="canDelete" background title="Delete project">
+    <ProjectPageSettingsBlock :auth-check="canDelete" background :title="t.project.settings.generalSettings.deleteProject">
       <div
         class="rounded border bg-foundation-page border-outline-3 text-body-xs text-foreground py-4 px-6"
       >
-        Permanently delete this project and all of its content from the Speckle
-        platform. This action is not reversible.
+        {{ t.project.settings.generalSettings.deleteProjectDesc }}
       </div>
       <template #bottom-buttons>
         <FormButton
@@ -13,7 +12,7 @@
           :disabled="!canDelete.authorized"
           @click="showDeleteDialog = true"
         >
-          Delete project
+          {{ t.project.settings.generalSettings.deleteProject }}
         </FormButton>
       </template>
     </ProjectPageSettingsBlock>
@@ -29,6 +28,8 @@
 <script setup lang="ts">
 import { graphql } from '~~/lib/common/generated/gql'
 import type { ProjectPageSettingsGeneralBlockDelete_ProjectFragment } from '~~/lib/common/generated/gql/graphql'
+
+const { t } = useLocale()
 
 graphql(`
   fragment ProjectPageSettingsGeneralBlockDelete_Project on Project {

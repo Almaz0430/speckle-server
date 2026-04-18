@@ -1,11 +1,11 @@
 <template>
   <div class="flex flex-col gap-4">
-    <ProjectPageSettingsBlock background title="Project info" :auth-check="canUpdate">
+    <ProjectPageSettingsBlock background :title="t.project.settings.generalSettings.projectInfo" :auth-check="canUpdate">
       <FormTextInput
         v-model="localProjectName"
         name="projectName"
-        label="Project name"
-        placeholder="Project name"
+        :label="t.project.settings.generalSettings.name"
+        :placeholder="t.project.settings.generalSettings.name"
         show-label
         color="foundation"
         class="mb-2"
@@ -14,8 +14,8 @@
       <FormTextArea
         v-model="localProjectDescription"
         name="projectDescription"
-        label="Project description"
-        placeholder="Description"
+        :label="t.project.settings.generalSettings.description"
+        :placeholder="t.project.settings.generalSettings.description"
         show-label
         show-optional
         color="foundation"
@@ -23,9 +23,9 @@
       />
       <template #bottom-buttons>
         <FormButton color="subtle" :disabled="!hasChanges" @click="resetLocalState">
-          Cancel
+          {{ t.projects.deleteDialog.cancel }}
         </FormButton>
-        <FormButton :disabled="!hasChanges" @click="emitUpdate">Update</FormButton>
+        <FormButton :disabled="!hasChanges" @click="emitUpdate">{{ t.project.settings.generalSettings.projectInfo }}</FormButton>
       </template>
     </ProjectPageSettingsBlock>
 
@@ -34,9 +34,9 @@
       max-width="md"
       :buttons="dialogButtons"
     >
-      <template #header>Unsaved changes</template>
+      <template #header>{{ t.projects.deleteDialog.title }}</template>
       <div class="space-y-4">
-        <p>You have unsaved changes. Do you want to save them before leaving?</p>
+        <p>{{ t.project.settings.generalSettings.projectInfo }}</p>
       </div>
     </LayoutDialog>
   </div>
@@ -54,6 +54,8 @@ import {
 import type { ProjectPageSettingsGeneralBlockProjectInfo_ProjectFragment } from '~~/lib/common/generated/gql/graphql'
 import type { RouteLocationRaw } from 'vue-router'
 import { graphql } from '~~/lib/common/generated/gql'
+
+const { t } = useLocale()
 
 graphql(`
   fragment ProjectPageSettingsGeneralBlockProjectInfo_Project on Project {
@@ -113,12 +115,12 @@ const resetLocalState = () => {
 
 const dialogButtons = computed<LayoutDialogButton[]>(() => [
   {
-    text: 'Discard changes',
+    text: t.project.settings.generalSettings.discardChanges,
     props: { color: 'outline' },
     onClick: handleRedirection
   },
   {
-    text: 'Save changes',
+    text: t.project.settings.generalSettings.saveChanges,
     props: {
       submit: true
     },

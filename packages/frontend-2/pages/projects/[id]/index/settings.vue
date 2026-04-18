@@ -1,6 +1,6 @@
 <template>
   <div class="mt-3">
-    <h1 class="block text-heading-lg mb-4 sm:mb-8">Settings</h1>
+    <h1 class="block text-heading-lg mb-4 sm:mb-8">{{ t.project.settings.title }}</h1>
     <LayoutTabsVertical
       v-model:active-item="activeSettingsPageTab"
       :items="settingsTabItems"
@@ -42,45 +42,47 @@ graphql(`
   }
 `)
 
+const { t } = useLocale()
+
 const attrs = useAttrs() as {
   project: ProjectPageSettingsTab_ProjectFragment
 }
 const route = useRoute()
 const router = useRouter()
 
-const canReadEmbedTokens = computed(() => attrs.project.permissions.canReadEmbedTokens)
-const canReadWebhooks = computed(() => attrs.project.permissions.canReadWebhooks)
+const canReadEmbedTokens = computed(() => attrs.project?.permissions?.canReadEmbedTokens)
+const canReadWebhooks = computed(() => attrs.project?.permissions?.canReadWebhooks)
 const projectName = computed(() =>
-  attrs.project.name.length ? attrs.project.name : ''
+  attrs.project?.name?.length ? attrs.project.name : ''
 )
-const isAccEnabled = useIsAccModuleEnabled() // check permission over project
+const isAccEnabled = useIsAccModuleEnabled()
 const canReadAccIntegrationSettings = computed(
-  () => attrs.project.permissions.canReadAccIntegrationSettings
+  () => attrs.project?.permissions?.canReadAccIntegrationSettings
 )
 
 useHead({
-  title: `Settings | ${projectName.value}`
+  title: computed(() => `${t.project.settings.title} | ${projectName.value}`)
 })
 
 const settingsTabItems = computed((): LayoutPageTabItem[] => [
   {
-    title: 'General',
+    title: t.project.settings.general,
     id: 'general'
   },
   {
-    title: 'Webhooks',
+    title: t.project.settings.webhooks,
     id: 'webhooks',
     disabled: !canReadWebhooks.value.authorized,
     disabledMessage: canReadWebhooks.value.message
   },
   {
-    title: 'Tokens',
+    title: t.project.settings.tokens,
     id: 'tokens',
     disabled: !canReadEmbedTokens.value.authorized,
     disabledMessage: canReadEmbedTokens.value.message
   },
   {
-    title: 'Integrations',
+    title: t.project.settings.integrations,
     id: 'integrations',
     disabled: isAccEnabled && !canReadAccIntegrationSettings.value.authorized,
     disabledMessage: canReadAccIntegrationSettings.value.message

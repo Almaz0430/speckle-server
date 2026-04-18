@@ -31,7 +31,7 @@
         class="flex items-center pr-4 text-body-3xs text-foreground-2 select-none"
       >
         <span>
-          {{ t.viewer.panels.results.replace('{count}', filteredObjectsCount.toString()) }}
+          {{ pluralize(t.viewer.panels.results, filteredObjectsCount) }}
         </span>
       </div>
     </div>
@@ -115,7 +115,7 @@ const mp = useMixpanel()
 const {
   filters: { hasAnyFiltersApplied }
 } = useInjectedViewerInterfaceState()
-const { t } = useLocale()
+const { t, pluralize } = useLocale()
 
 const showPropertySelection = ref(false)
 const propertySelectionRef = ref<HTMLElement>()

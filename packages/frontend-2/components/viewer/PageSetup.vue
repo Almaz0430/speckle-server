@@ -217,7 +217,7 @@ const title = computed(() => {
     const projectName = project.value.name || ''
 
     if (modelCount > 1) {
-      return projectName ? `${t.value.viewer.embed.multipleModels} - ${projectName}` : t.value.viewer.embed.multipleModels
+      return projectName ? `${t.viewer.embed.multipleModels} - ${projectName}` : t.viewer.embed.multipleModels
     } else if (modelCount === 1) {
       const modelName = project.value.models.items[0].name || ''
       return projectName ? `${modelName} - ${projectName}` : modelName
@@ -248,9 +248,9 @@ const embedName = computed(() => {
 
 const lastUpdate = computed(() => {
   if (project.value?.models?.items[0] && project.value.models.items[0].updatedAt) {
-    return t.value.viewer.embed.updated + ' ' + dayjs(project.value.models.items[0].updatedAt).fromNow()
+    return t.viewer.embed.updated + ' ' + dayjs(project.value.models.items[0].updatedAt).fromNow()
   } else if (project.value) {
-    return t.value.viewer.embed.created + ' ' + dayjs(project.value.createdAt).fromNow()
+    return t.viewer.embed.created + ' ' + dayjs(project.value.createdAt).fromNow()
   } else return undefined
 })
 

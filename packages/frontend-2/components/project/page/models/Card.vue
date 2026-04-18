@@ -77,7 +77,7 @@
           </NuxtLink>
         </template>
         <div
-          v-if="!isPendingModelFragment(model) && project"
+          v-if="!isPendingModelFragment(model) && project && !showSimplePreviewLoader"
           v-show="!pendingVersion && (isVersionUploading || !previewUrl)"
           class="h-48 w-full relative z-30"
         >
@@ -89,6 +89,12 @@
             class="w-full h-full"
             @uploading="onVersionUploading"
           />
+        </div>
+        <div
+          v-else-if="!isPendingModelFragment(model) && project && showSimplePreviewLoader"
+          class="h-48 w-full relative z-20 overflow-hidden rounded-xl border border-outline-2 bg-foundation-page"
+        >
+          <div class="absolute inset-0 animate-pulse bg-gradient-to-r from-highlight-1/40 via-highlight-2/30 to-highlight-1/40" />
         </div>
       </div>
       <div class="relative z-20 flex justify-between items-center w-full h-8 pl-2">
@@ -200,11 +206,13 @@ const props = withDefaults(
     showActions?: boolean
     disableDefaultLink?: boolean
     smallView?: boolean
+    simplePreviewLoader?: boolean
   }>(),
   {
     showVersions: true,
     showActions: true,
-    smallView: false
+    smallView: false,
+    simplePreviewLoader: false
   }
 )
 
@@ -295,6 +303,14 @@ const pendingVersion = computed(() => {
 
   return lastPendingVersion
 })
+
+const showSimplePreviewLoader = computed(
+  () =>
+    props.simplePreviewLoader &&
+    !pendingVersion.value &&
+    !isVersionUploading.value &&
+    !previewUrl.value
+)
 
 const onCardClick = (event: KeyboardEvent | MouseEvent) => {
   if (

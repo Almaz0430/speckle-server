@@ -1,25 +1,24 @@
 <template>
-  <ProjectPageSettingsBlock :auth-check="canUpdate" title="Webhooks">
+  <ProjectPageSettingsBlock :auth-check="canUpdate" :title="t.project.settings.webhooks">
     <template #introduction>
       <p class="text-body-xs text-foreground">
-        Subscribe to events and get notified in real time. Use to trigger CI apps,
-        automation workflows, and more.
+        {{ t.project.settings.webhooksDescription }}
       </p>
     </template>
     <template #top-buttons>
       <FormButton :disabled="!canUpdate?.authorized" @click="openCreateWebhookDialog">
-        New
+        {{ t.project.settings.new }}
       </FormButton>
     </template>
     <template v-if="webhooks.length !== 0">
       <LayoutTable
         class="mt-6"
         :columns="[
-          { id: 'enabled', header: 'Enabled', classes: 'col-span-1' },
-          { id: 'data', header: 'Data', classes: 'col-span-5' },
+          { id: 'enabled', header: t.project.settings.enabled, classes: 'col-span-1' },
+          { id: 'data', header: t.project.settings.data, classes: 'col-span-5' },
           {
             id: 'triggers',
-            header: 'Trigger events',
+            header: t.project.settings.triggerEvents,
             classes: 'col-span-6 whitespace-break-spaces text-xs'
           }
         ]"
@@ -27,13 +26,13 @@
         :buttons="[
           {
             icon: PencilIcon,
-            label: 'Edit',
+            label: t.project.settings.edit,
             disabled: !canUpdate?.authorized,
             action: openEditWebhookDialog
           },
           {
             icon: TrashIcon,
-            label: 'Delete',
+            label: t.project.settings.delete,
             disabled: !canUpdate?.authorized,
             action: openDeleteWebhookDialog
           }
@@ -132,6 +131,8 @@ import {
 import type { Optional } from '@speckle/shared'
 import { webhookTriggerDisplayNames } from '~~/lib/projects/composables/webhooks'
 import { graphql } from '~/lib/common/generated/gql'
+
+const { t } = useLocale()
 
 graphql(`
   fragment ProjectPageSettingsWebhooks_Project on Project {

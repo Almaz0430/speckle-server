@@ -2,7 +2,7 @@
   <CommonCard class="mb-4 bg-foundation text-body-xs !py-4">
     <p class="text-foreground">
       <span class="font-medium">
-        {{ t.projects.hiddenProjects.title.replace('{count}', hiddenItemCount.toString()) }}
+        {{ pluralize(t.projects.hiddenProjects.title, hiddenItemCount) }}
       </span>
       {{ t.projects.hiddenProjects.description.replace('{pronoun}', hiddenItemCount === 1 ? 'it' : 'them') }}
     </p>
@@ -28,7 +28,7 @@ import { graphql } from '~~/lib/common/generated/gql'
 import type { ProjectsHiddenProjectWarning_UserFragment } from '~~/lib/common/generated/gql/graphql'
 import { workspaceSsoRoute } from '~/lib/common/helpers/route'
 
-const { t } = useLocale()
+const { t, pluralize } = useLocale()
 
 graphql(`
   fragment ProjectsHiddenProjectWarning_User on User {

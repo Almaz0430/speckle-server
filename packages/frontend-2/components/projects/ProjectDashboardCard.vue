@@ -58,7 +58,7 @@
               color="outline"
               :icon-right="ChevronRightIcon"
             >
-              {{ t.projects.card.modelCount.replace('{count}', modelItemTotalCount.toString()) }}
+              {{ pluralize(t.projects.card.modelCount, modelItemTotalCount) }}
             </FormButton>
               <div
                 v-if="!project.workspace?.id && isWorkspacesEnabled"
@@ -81,36 +81,35 @@
         </div>
       </div>
       <div :class="gridClasses">
-        <template v-if="!isModelUploading">
-          <ProjectPageModelsCard
-            v-for="pendingModel in pendingModels"
-            :key="pendingModel.id"
-            :model="pendingModel"
-            :project="project"
-            show-versions
-            :project-id="project.id"
-            height="h-48"
-            show-actions
-          />
-          <ProjectPageModelsCard
-            v-for="model in models"
-            :key="model.id"
-            :model="model"
-            :project="project"
-            show-versions
-            show-actions
-            :project-id="project.id"
-            height="h-48"
-            @click="router.push(getModelItemRoute(model))"
-          />
-        </template>
-        <ProjectCardImportFileArea
-          v-if="hasNoModels || isModelUploading"
-          empty-state-variant="modelsSection"
+        <ProjectPageModelsCard
+          v-for="pendingModel in pendingModels"
+          :key="pendingModel.id"
+          :model="pendingModel"
           :project="project"
-          class="h-28 col-span-4"
-          @uploading="onModelUploading"
+          show-versions
+          :project-id="project.id"
+          height="h-48"
+          show-actions
+          simple-preview-loader
         />
+        <ProjectPageModelsCard
+          v-for="model in models"
+          :key="model.id"
+          :model="model"
+          :project="project"
+          show-versions
+          show-actions
+          :project-id="project.id"
+          height="h-48"
+          simple-preview-loader
+          @click="router.push(getModelItemRoute(model))"
+        />
+        <div
+          v-if="hasNoModels"
+          class="h-28 col-span-4 rounded-xl border border-outline-2 bg-foundation-page overflow-hidden relative"
+        >
+          <div class="absolute inset-0 animate-pulse bg-gradient-to-r from-highlight-1/40 via-highlight-2/30 to-highlight-1/40" />
+        </div>
       </div>
     </div>
   </div>
@@ -124,10 +123,9 @@ import { useGeneralProjectPageUpdateTracking } from '~~/lib/projects/composables
 import { ChevronRightIcon } from '@heroicons/vue/20/solid'
 import { workspaceRoute } from '~/lib/common/helpers/route'
 import { RoleInfo, type StreamRoles } from '@speckle/shared'
-import type { FileAreaUploadingPayload } from '~/lib/form/helpers/fileUpload'
 import { getModelItemRoute } from '~/lib/projects/helpers/models'
 
-const { t } = useLocale()
+const { t, pluralize } = useLocale()
 
 defineEmits<{
   (e: 'moveProject'): void
@@ -142,8 +140,6 @@ const props = defineProps<{
 const router = useRouter()
 const isWorkspacesEnabled = useIsWorkspacesEnabled()
 const { formattedRelativeDate, formattedFullDate } = useDateFormatters()
-
-const isModelUploading = ref(false)
 
 const isOwner = computed(() => props.project.role === Roles.Stream.Owner)
 const projectId = computed(() => props.project.id)
@@ -197,7 +193,4 @@ const gridClasses = computed(() => [
   '2xl:[&>*:nth-child(n+3)]:block'
 ])
 
-const onModelUploading = (payload: FileAreaUploadingPayload) => {
-  isModelUploading.value = payload.isUploading
-}
 </script>

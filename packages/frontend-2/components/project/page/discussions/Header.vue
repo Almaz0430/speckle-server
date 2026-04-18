@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="flex justify-between items-center mb-8 mt-3">
-      <h1 class="block text-heading-lg">Discussions</h1>
+      <h1 class="block text-heading-lg">{{ t.project.tabs.discussions }}</h1>
       <div class="space-x-2 flex items-center">
         <FormCheckbox
           :id="checkboxId"
           v-model="finalIncludeArchived"
           name="includeArchived"
           :value="true"
-          label="Include resolved"
+          :label="t.project.discussions.includeResolved"
           label-position="right"
         />
       </div>
@@ -19,6 +19,8 @@
 import type { Optional } from '@speckle/shared'
 import { graphql } from '~~/lib/common/generated/gql'
 import type { ProjectDiscussionsPageHeader_ProjectFragment } from '~~/lib/common/generated/gql/graphql'
+
+const { t } = useLocale()
 
 graphql(`
   fragment ProjectDiscussionsPageHeader_Project on Project {

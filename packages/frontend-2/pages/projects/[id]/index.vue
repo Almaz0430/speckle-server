@@ -150,6 +150,8 @@ enum ActionTypes {
   Move = 'move'
 }
 
+const { t } = useLocale()
+
 const route = useRoute()
 const router = useRouter()
 const copyProjectLink = useCopyProjectLink()
@@ -240,12 +242,12 @@ const isWorkspacesEnabled = useIsWorkspacesEnabled()
 const pageTabItems = computed((): LayoutPageTabItem[] => {
   const items: LayoutPageTabItem[] = [
     {
-      title: 'Models',
+      title: t.project.tabs.models,
       id: 'models',
       count: modelCount.value
     },
     {
-      title: 'Discussions',
+      title: t.project.tabs.discussions,
       id: 'discussions',
       count: commentCount.value
     }
@@ -257,29 +259,39 @@ const pageTabItems = computed((): LayoutPageTabItem[] => {
     project.value?.workspace?.role !== Roles.Workspace.Guest
   ) {
     items.push({
-      title: 'Automations',
+      title: t.project.tabs.automations,
       id: 'automations'
     })
   }
 
   if (canReadSettings.value?.authorized) {
     items.push({
-      title: 'Collaborators',
+      title: t.project.tabs.collaborators,
       id: 'collaborators'
     })
 
     items.push({
-      title: 'Settings',
+      title: t.project.tabs.settings,
       id: 'settings'
     })
   }
 
   if (project.value?.hasAccessToDashboards && canListDashboards.value) {
     items.push({
-      title: 'Dashboards',
+      title: t.project.tabs.dashboards,
       id: 'dashboards'
     })
   }
+
+  items.push({
+    title: t.project.tabs.materials,
+    id: 'materials'
+  })
+
+  items.push({
+    title: t.project.tabs.sheets,
+    id: 'sheets'
+  })
 
   return items
 })
@@ -290,14 +302,16 @@ const findTabById = (id: string) =>
 const collaboratorsTooltip = computed(() =>
   canReadSettings.value?.authorized
     ? canUpdate.value?.authorized
-      ? 'Manage collaborators'
-      : 'View collaborators'
+      ? t.project.collaborators.manageTooltip
+      : t.project.collaborators.viewTooltip
     : null
 )
 
 const activePageTab = computed({
   get: () => {
     const path = router.currentRoute.value.path
+    if (/\/materials\/?$/i.test(path)) return findTabById('materials')
+    if (/\/sheets\/?$/i.test(path)) return findTabById('sheets')
     if (/\/discussions\/?$/i.test(path)) return findTabById('discussions')
     if (/\/automations\/?.*$/i.test(path)) return findTabById('automations')
     if (/\/acc\/?.*$/i.test(path)) return findTabById('acc')
@@ -337,6 +351,12 @@ const activePageTab = computed({
         if (canReadSettings.value?.authorized) {
           router.push({ path: projectRoute(projectId.value, 'settings') })
         }
+        break
+      case 'materials':
+        router.push({ path: projectRoute(projectId.value, 'materials') })
+        break
+      case 'sheets':
+        router.push({ path: projectRoute(projectId.value, 'sheets') })
         break
     }
   }
